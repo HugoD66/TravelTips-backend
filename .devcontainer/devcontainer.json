@@ -1,0 +1,9 @@
+{
+  "name": "NestJS/TypeORM Development",
+  "dockerFile": "../Dockerfile",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "forwardPorts": [3000],
+  "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+}

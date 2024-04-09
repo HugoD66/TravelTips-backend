@@ -1,73 +1,43 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# TravelTips Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Ce dépôt contient le backend de l'application TravelTips, une application de partage de conseils de voyage.
 
 ## Installation
 
-```bash
-$ npm install
-```
+Assurez-vous d'avoir Docker installé sur votre machine.
 
-## Running the app
+1. Clonez ce dépôt sur votre machine locale :
 
-```bash
-# development
-$ npm run start
+   bash
+   git clone https://github.com/votre-utilisateur/TravelTips-backend.git
 
-# watch mode
-$ npm run start:dev
+Accédez au répertoire cloné :
 
-# production mode
-$ npm run start:prod
-```
+bash
+cd TravelTips-backend
+Construisez l'image Docker de l'application :
 
-## Test
+bash
+docker build -t traveltips-backend .
 
-```bash
-# unit tests
-$ npm run test
+Démarrage
+Une fois l'image Docker construite, vous pouvez démarrer l'application à l'aide de Docker Compose.
 
-# e2e tests
-$ npm run test:e2e
+Démarrez les services à l'aide de Docker Compose :
 
-# test coverage
-$ npm run test:cov
-```
+bash
+docker-compose up
 
-## Support
+Cela lancera le serveur de base de données PostgreSQL et l'application Nest.js.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Attendez que les services démarrent. Une fois que vous voyez que PostgreSQL est prêt à accepter les connexions, vous pouvez accéder à l'API de l'application à l'adresse suivante :
 
-## Stay in touch
+http://localhost:3000
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Mode de développement
+Si vous souhaitez exécuter l'application en mode de développement, vous pouvez utiliser la commande suivante après avoir démarré les services avec Docker Compose :
 
-## License
+bash
+npm run start:dev
 
-Nest is [MIT licensed](LICENSE).
+Cela lancera l'application Nest.js en mode de développement, avec un rechargement automatique lorsque des fichiers sont modifiés.

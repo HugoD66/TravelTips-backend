@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Exposez le port sur lequel votre app va tourner
-EXPOSE 5432
+EXPOSE 4000
 
 # Commande pour démarrer votre application avec Docker Compose
 CMD ["docker-compose", "up";"npm", "run", "start:dev" ]

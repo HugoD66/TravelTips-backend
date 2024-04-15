@@ -8,25 +8,23 @@ import {
 import { UserRole } from '../entities/user.entity';
 
 export class CreateUserDto {
+  @IsNotEmpty()
+  firstName: string;
   @MinLength(3)
   @IsNotEmpty()
-  firstName!: string;
+  lastName: string;
 
   @MinLength(3)
   @IsNotEmpty()
-  lastName!: string;
-
-  @MinLength(3)
-  @IsNotEmpty()
-  birthday!: string;
+  birthday: string;
 
   @IsNotEmpty()
   @MinLength(8)
-  password!: string;
+  password: string;
 
   @IsNotEmpty()
   @IsEmail()
-  mail!: string;
+  mail: string;
 
   @IsEnum(UserRole)
   @IsOptional()

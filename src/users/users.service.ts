@@ -42,18 +42,22 @@ export class UsersService {
     };
     const user = await this.userRepository.findOne(options);
 
-    // Compare le mot de passe fourni avec le mot de passe haché stocké
-    const match = await bcrypt.compare(loginUserDto.password, user.password);
+    if (user !== null) {
+      // Compare le mot de passe fourni avec le mot de passe haché stocké
+      const match = await bcrypt.compare(loginUserDto.password, user.password);
 
-    if (!match) {
-      throw new UnauthorizedException(); // Lance une exception si les mots de passe ne correspondent pas
+      if (!match) {
+        throw new UnauthorizedException(); // Lance une exception si les mots de passe ne correspondent pas
+      }
+
+      // Génère un jeton JWT avec les informations de l'utilisateur
+      const payload = { sub: user.id, mail: user.mail, role: user.role };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+      };
+    } else {
+      console.log("l'utilisateur n'existe pas");
     }
-
-    // Génère un jeton JWT avec les informations de l'utilisateur
-    const payload = { sub: user.id, mail: user.mail, role: user.role };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
   }
 
   // Fonction pour récupérer tous les utilisateurs

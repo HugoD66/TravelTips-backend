@@ -2,10 +2,10 @@ import { MinLength, IsEmail, IsNotEmpty } from 'class-validator';
 
 export class loginUserDto {
   @IsNotEmpty()
-  @MinLength(8)
-  password!: string;
+  @IsEmail()
+  mail: string;
 
   @IsNotEmpty()
-  @IsEmail()
-  mail!: string;
+  @MinLength(8)
+  password: string;
 }

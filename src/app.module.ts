@@ -21,6 +21,7 @@ import { Country } from './country/entities/country.entity';
 import { City } from './city/entities/city.entity';
 import { Picture } from './picture/entities/picture.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { FixturesModule } from './fixtures/fixtures.module';
 import User from './users/entities/user.entity';
 
 @Module({
@@ -60,6 +61,7 @@ import User from './users/entities/user.entity';
     CountryModule,
     CityModule,
     PictureModule,
+    FixturesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

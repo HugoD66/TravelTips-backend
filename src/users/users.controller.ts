@@ -21,7 +21,7 @@ import { AuthGuard } from '../auth/auth.gards';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @Post('auth/sign-up')
+  @Post('register')
   @UsePipes(new ValidationPipe())
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);

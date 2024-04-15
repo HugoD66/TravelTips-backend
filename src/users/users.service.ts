@@ -30,6 +30,7 @@ export class UsersService {
     });
     const insertedUser = await this.userRepository.save(newUser);
     delete insertedUser.password; // Ne pas retourner le mot de passe dans la réponse
+    console.log(insertedUser);
     return insertedUser;
   }
 

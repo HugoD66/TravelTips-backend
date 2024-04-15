@@ -16,30 +16,30 @@ export class ItineraryController {
   constructor(private readonly itineraryService: ItineraryService) {}
 
   @Post()
-  create(@Body() createItineraryDto: CreateItineraryDto) {
+  async create(@Body() createItineraryDto: CreateItineraryDto) {
     return this.itineraryService.create(createItineraryDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.itineraryService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itineraryService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.itineraryService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateItineraryDto: UpdateItineraryDto,
   ) {
-    return this.itineraryService.update(+id, updateItineraryDto);
+    return this.itineraryService.update(id, updateItineraryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itineraryService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.itineraryService.remove(id);
   }
 }

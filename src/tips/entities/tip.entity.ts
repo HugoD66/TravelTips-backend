@@ -29,21 +29,21 @@ export class Tip {
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
-  idUser!: User;
+  idUser!: User | string;
 
   @ManyToOne(() => City, (city) => city.id)
   @JoinColumn({ name: 'idCity' })
-  idCity!: City;
+  idCity!: City | string;
 
   @OneToMany(() => Rate, (rate) => rate.idTips)
-  rate!: Rate[];
+  rate?: Rate[];
 
   @OneToMany(() => Comment, (comment) => comment.idTips)
-  comment!: Comment[];
+  comment?: Comment[];
 
   @OneToMany(() => DayItinerary, (dayItinerary) => dayItinerary.idTips)
-  dayItinerary!: DayItinerary[];
+  dayItinerary?: DayItinerary[];
 
   @OneToMany(() => Picture, (picture) => picture.idTips)
-  picture!: Picture[];
+  picture?: Picture[];
 }

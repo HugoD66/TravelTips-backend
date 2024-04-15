@@ -8,5 +8,5 @@ export class Country {
   @Column()
   name!: string;
   @OneToMany(() => City, (city) => city.idCountry)
-  city!: City[];
+  city!: City[] | string[];
 }

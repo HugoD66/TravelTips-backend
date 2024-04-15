@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFixtureDto } from './dto/create-fixture.dto';
 import { UpdateFixtureDto } from './dto/update-fixture.dto';
 import { Mockups } from './datas';
@@ -13,6 +13,7 @@ import { Rate } from '../rate/entities/rate.entity';
 import { Category } from '../category/entities/category.entity';
 import { Itinerary } from '../itinerary/entities/itinerary.entity';
 import { DayItinerary } from '../day-itinerary/entities/day-itinerary.entity';
+import { Fixture } from './entities/fixture.entity';
 
 @Injectable()
 export class FixturesService {
@@ -29,10 +30,11 @@ export class FixturesService {
     private itineraryRepository: Repository<Itinerary>,
     @InjectRepository(DayItinerary)
     private dayItineraryRepository: Repository<DayItinerary>,
+    private datas: Mockups,
   ) {}
   async seedMockups() {
-    const data = Mockups.generateAllData();
-
+    await this.datas.seedAll();
+    /*
     await this.countryRepository.save(data.country);
     await this.cityRepository.save(data.city);
     await this.userRepository.save(data.user);
@@ -42,28 +44,8 @@ export class FixturesService {
     await this.rateRepository.save(data.rate);
     await this.itineraryRepository.save(data.itinerary);
     await this.dayItineraryRepository.save(data.dayItinerary);
-    // Ici, vous pourriez sauvegarder ces données dans la base de données avec votre logique ORM
-    // Par exemple, en utilisant un repository pour chaque type d'entité
+    */
+
     return 'Mockups created';
-  }
-
-  create(createFixtureDto: CreateFixtureDto) {
-    return 'This action adds a new fixture';
-  }
-
-  findAll() {
-    return `This action returns all fixtures`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} fixture`;
-  }
-
-  update(id: number, updateFixtureDto: UpdateFixtureDto) {
-    return `This action updates a #${id} fixture`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} fixture`;
   }
 }

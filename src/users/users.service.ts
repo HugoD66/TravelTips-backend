@@ -66,6 +66,10 @@ export class UsersService {
     return users;
   }
 
+  async findOne(id: string) {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
   // Fonction pour récupérer un utilisateur spécifique par ID
   // Lance des exceptions pour le format UUID invalide et lorsque l'utilisateur n'est pas trouvé
   async returnUser(id: string) {

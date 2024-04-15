@@ -16,30 +16,30 @@ export class DayItineraryController {
   constructor(private readonly dayItineraryService: DayItineraryService) {}
 
   @Post()
-  create(@Body() createDayItineraryDto: CreateDayItineraryDto) {
+  async create(@Body() createDayItineraryDto: CreateDayItineraryDto) {
     return this.dayItineraryService.create(createDayItineraryDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.dayItineraryService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dayItineraryService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.dayItineraryService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateDayItineraryDto: UpdateDayItineraryDto,
   ) {
-    return this.dayItineraryService.update(+id, updateDayItineraryDto);
+    return this.dayItineraryService.update(id, updateDayItineraryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dayItineraryService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.dayItineraryService.remove(id);
   }
 }

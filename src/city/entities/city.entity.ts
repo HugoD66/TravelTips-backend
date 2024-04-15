@@ -23,8 +23,8 @@ export class City {
 
   @ManyToOne(() => Country, (country) => country.id)
   @JoinColumn({ name: 'idCountry' })
-  idCountry: Country;
+  idCountry: Country |string;
 
   @OneToMany(() => Tip, (tip) => tip.id)
-  tips!: Tip[];
+  tips!: Tip[] |string[];
 }

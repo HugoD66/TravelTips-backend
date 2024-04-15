@@ -23,31 +23,31 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Post('register')
   @UsePipes(new ValidationPipe())
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @HttpCode(HttpStatus.CREATED)
   @Post('auth/login')
   @UsePipes(new ValidationPipe())
-  signIn(@Body() signIn: loginUserDto) {
+  async signIn(@Body() signIn: loginUserDto) {
     return this.usersService.signIn(signIn);
   }
   @UseGuards(AuthGuard)
   @Get()
-  findAll() {
+  async findAll() {
     return this.usersService.findAll();
   }
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('me')
-  returnUser(@Req() req) {
+  async returnUser(@Req() req) {
     const user = this.usersService.returnUser(req.user.sub);
     return user;
   }
   @UseGuards(AuthGuard)
   @Get(':id')
-  getUserById(@Param('id') userId: string) {
+  async getUserById(@Param('id') userId: string) {
     const user = this.usersService.returnUser(userId);
     return user;
   }

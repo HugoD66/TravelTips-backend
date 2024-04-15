@@ -33,7 +33,7 @@ export class UsersController {
   async signIn(@Body() signIn: loginUserDto) {
     return this.usersService.signIn(signIn);
   }
-  @UseGuards(AuthGuard)
+
   @Get()
   async findAll() {
     return this.usersService.findAll();
@@ -45,7 +45,7 @@ export class UsersController {
     const user = this.usersService.returnUser(req.user.sub);
     return user;
   }
-  @UseGuards(AuthGuard)
+
   @Get(':id')
   async getUserById(@Param('id') userId: string) {
     const user = this.usersService.returnUser(userId);

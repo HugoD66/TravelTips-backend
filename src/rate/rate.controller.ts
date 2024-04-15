@@ -16,27 +16,27 @@ export class RateController {
   constructor(private readonly rateService: RateService) {}
 
   @Post()
-  create(@Body() createRateDto: CreateRateDto) {
+  async create(@Body() createRateDto: CreateRateDto) {
     return this.rateService.create(createRateDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.rateService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rateService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.rateService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRateDto: UpdateRateDto) {
-    return this.rateService.update(+id, updateRateDto);
+  async update(@Param('id') id: string, @Body() updateRateDto: UpdateRateDto) {
+    return this.rateService.update(id, updateRateDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.rateService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.rateService.remove(id);
   }
 }

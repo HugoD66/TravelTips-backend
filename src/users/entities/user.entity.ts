@@ -41,16 +41,16 @@ export class User {
   role: UserRole;
 
   @OneToMany(() => Itinerary, (itinerary) => itinerary.idUser)
-  itinerary!: Itinerary[];
+  itinerary?: Itinerary[];
 
   @OneToMany(() => Comment, (comment) => comment.idUser)
-  comment!: Comment[];
+  comment?: Comment[];
 
   @OneToMany(() => Rate, (rate) => rate.idUser)
-  rate!: Rate[];
+  rate?: Rate[];
 
   @OneToMany(() => Tip, (tip) => tip.idUser)
-  tip!: Tip[];
+  tip?: Tip[];
 }
 
 export default User;

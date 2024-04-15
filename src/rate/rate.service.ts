@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRateDto } from './dto/create-rate.dto';
 import { UpdateRateDto } from './dto/update-rate.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Rate } from './entities/rate.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RateService {
-  create(createRateDto: CreateRateDto) {
-    return 'This action adds a new rate';
+  constructor(
+    @InjectRepository(Rate)
+    private rateRepository: Repository<Rate>,
+  ) {}
+
+  async create(createRateDto: CreateRateDto) {
+    return this.rateRepository.save(createRateDto);
   }
 
-  findAll() {
-    return `This action returns all rate`;
+  async findAll() {
+    return this.rateRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} rate`;
+  async findOne(id: string) {
+    return this.rateRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateRateDto: UpdateRateDto) {
-    return `This action updates a #${id} rate`;
+  async update(id: string, updateRateDto: UpdateRateDto) {
+    return this.rateRepository.update(id, updateRateDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} rate`;
+  async remove(id: string) {
+    return this.rateRepository.delete(id);
   }
 }

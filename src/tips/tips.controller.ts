@@ -16,27 +16,27 @@ export class TipsController {
   constructor(private readonly tipsService: TipsService) {}
 
   @Post()
-  create(@Body() createTipDto: CreateTipDto) {
+  async create(@Body() createTipDto: CreateTipDto) {
     return this.tipsService.create(createTipDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.tipsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tipsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.tipsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTipDto: UpdateTipDto) {
-    return this.tipsService.update(+id, updateTipDto);
+  async update(@Param('id') id: string, @Body() updateTipDto: UpdateTipDto) {
+    return this.tipsService.update(id, updateTipDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tipsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.tipsService.remove(id);
   }
 }

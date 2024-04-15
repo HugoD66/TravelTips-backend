@@ -1,8 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, MinLength } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateRateDto {
   @IsNotEmpty()
-  @MinLength(3)
-  note: string;
+  idUser: string;
+
+  @IsNotEmpty()
+  idTips: string;
+
+  @IsNotEmpty()
+  note: number;
 }

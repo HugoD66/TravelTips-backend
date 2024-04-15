@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDayItineraryDto } from './dto/create-day-itinerary.dto';
 import { UpdateDayItineraryDto } from './dto/update-day-itinerary.dto';
+import { DayItinerary } from './entities/day-itinerary.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class DayItineraryService {
-  create(createDayItineraryDto: CreateDayItineraryDto) {
-    return 'This action adds a new dayItinerary';
+  constructor(
+    @InjectRepository(DayItinerary)
+    private dayItineraryRepository: Repository<DayItinerary>,
+  ) {}
+  async create(createDayItineraryDto: CreateDayItineraryDto) {
+    const dayItinerary = this.dayItineraryRepository.create(
+      createDayItineraryDto,
+    );
+    return this.dayItineraryRepository.save(dayItinerary);
   }
 
-  findAll() {
-    return `This action returns all dayItinerary`;
+  async findAll() {
+    return this.dayItineraryRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} dayItinerary`;
+  async findOne(id: string) {
+    return this.dayItineraryRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateDayItineraryDto: UpdateDayItineraryDto) {
-    return `This action updates a #${id} dayItinerary`;
+  async update(id: string, updateDayItineraryDto: UpdateDayItineraryDto) {
+    return this.dayItineraryRepository.update(id, updateDayItineraryDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} dayItinerary`;
+  async remove(id: string) {
+    return this.dayItineraryRepository.delete(id);
   }
 }

@@ -20,9 +20,9 @@ export class Comment {
 
   @ManyToOne(() => Tip, (tip) => tip.id)
   @JoinColumn({ name: 'idTips' })
-  idTips: Tip;
+  idTips: Tip |string;
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
-  idUser: User;
+  idUser: User |string;
 }

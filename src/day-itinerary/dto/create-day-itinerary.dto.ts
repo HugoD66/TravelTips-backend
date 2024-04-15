@@ -7,6 +7,9 @@ export class CreateDayItineraryDto {
   idTips!: string;
 
   @IsNotEmpty()
+  idItinerary!: string;
+
+  @IsNotEmpty()
   OrderInDay!: number;
 
   @IsDateString()

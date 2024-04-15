@@ -23,9 +23,9 @@ export class DayItinerary {
 
   @ManyToOne(() => Itinerary, (itinerary) => itinerary.id)
   @JoinColumn({ name: 'idItinerary' })
-  idItinerary: Itinerary;
+  idItinerary: Itinerary | string;
 
   @ManyToOne(() => Tip, (tip) => tip.id)
   @JoinColumn({ name: 'idTips' })
-  idTips: Tip;
+  idTips: Tip | string;
 }

@@ -47,12 +47,6 @@ export class UsersController {
     return user;
   }
 
-  @Get(':id')
-  async returnUser(@Param('id') userId: string) {
-    const user = this.usersService.returnUser(userId);
-    return user;
-  }
-
   @UseGuards(AuthGuard)
   @Patch(':id')
   async getUserById(

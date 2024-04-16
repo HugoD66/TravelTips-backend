@@ -37,6 +37,9 @@ export class TipsService {
     return this.tipRepository.findOne({ where: { id } });
   }
 
+  async findOneByUser(userId: string): Promise<Tip[]> {
+    return this.tipRepository.find({ where: { idUser: { id: userId } } });
+  }
   async update(id: string, updateTipDto: UpdateTipDto) {
     return this.tipRepository.update(id, updateTipDto);
   }

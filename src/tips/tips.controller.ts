@@ -30,6 +30,11 @@ export class TipsController {
     return this.tipsService.findOne(id);
   }
 
+  @Get('myTips/:id')
+  async findOneByUser(@Param('id') id: string) {
+    return this.tipsService.findOneByUser(id);
+  }
+
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateTipDto: UpdateTipDto) {
     return this.tipsService.update(id, updateTipDto);

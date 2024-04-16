@@ -71,10 +71,11 @@ export class Mockups {
     const countryList = await this.countryService.findAll();
     await this.cityService.create({
       name: 'Bordeaux',
-      zipCode: 33000,
+      zipCode: '33000',
       idCountry: countryList[Math.floor(Math.random() * countryList.length)].id,
     });
   }
+
   async generateCategory() {
     await this.categoryService.create({
       name: 'Tourisme',

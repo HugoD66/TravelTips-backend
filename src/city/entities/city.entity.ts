@@ -19,7 +19,7 @@ export class City {
   name!: string;
 
   @Column()
-  zipCode!: number;
+  zipCode?: string;
 
   @ManyToOne(() => Country, (country) => country.id)
   @JoinColumn({ name: 'idCountry' })

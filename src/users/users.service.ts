@@ -54,6 +54,7 @@ export class UsersService {
       const payload = { sub: user.id, mail: user.mail, role: user.role };
       return {
         access_token: await this.jwtService.signAsync(payload),
+        id: user.id,
       };
     } else {
       console.log("l'utilisateur n'existe pas");
@@ -68,6 +69,34 @@ export class UsersService {
       delete user.password; // Ne pas retourner les mots de passe dans la réponse
     }
     return users;
+  }
+  async updateUser(id: string, updatedUserData: Partial<User>): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Utilisateur non trouvé');
+    }
+    // Générer un sel pour le hachage bcrypt
+    const saltOrRounds: number = 10;
+
+    // Hasher le nouveau mot de passe
+    const hashedPassword = await bcrypt.hash(
+      updatedUserData.password,
+      saltOrRounds,
+    );
+
+    // Mettre à jour le mot de passe dans l'objet updatedUserData
+    updatedUserData.password = hashedPassword;
+
+    // Mettre à jour les propriétés de l'utilisateur avec les nouvelles données
+    Object.assign(user, updatedUserData);
+
+    // Enregistrer les modifications dans la base de données
+    await this.userRepository.save(user);
+
+    return user;
   }
 
   async findOne(id: string) {
@@ -93,7 +122,6 @@ export class UsersService {
       throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
     }
 
-    delete user.password; // Ne pas retourner le mot de passe dans la réponse
     return user;
   }
 }

@@ -10,6 +10,7 @@ import {
   Req,
   UseGuards,
   Param,
+  Patch,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -47,8 +48,18 @@ export class UsersController {
   }
 
   @Get(':id')
-  async getUserById(@Param('id') userId: string) {
+  async returnUser(@Param('id') userId: string) {
     const user = this.usersService.returnUser(userId);
+    return user;
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch(':id')
+  async getUserById(
+    @Param('id') userId: string,
+    @Body() updateUserDto: CreateUserDto,
+  ) {
+    const user = this.usersService.updateUser(userId, updateUserDto);
     return user;
   }
 }

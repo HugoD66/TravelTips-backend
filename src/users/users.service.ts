@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   BadRequestException,
   Injectable,
@@ -41,23 +42,23 @@ export class UsersService {
       where: { mail: loginUserDto.mail },
     };
     const user = await this.userRepository.findOne(options);
-
-    if (user !== null) {
-      // Compare le mot de passe fourni avec le mot de passe haché stocké
-      const match = await bcrypt.compare(loginUserDto.password, user.password);
-
-      if (!match) {
-        throw new UnauthorizedException(); // Lance une exception si les mots de passe ne correspondent pas
-      }
-
-      // Génère un jeton JWT avec les informations de l'utilisateur
+    console.log('le user ' + user);
+    if (user == null) {
+      throw new NotFoundException();
+    }
+    const match = await bcrypt.compare(loginUserDto.password, user.password);
+    if (!match) {
+      throw new UnauthorizedException(); // Lance une exception si les mots de passe ne correspondent pas
+    }
+    try {
       const payload = { sub: user.id, mail: user.mail, role: user.role };
       return {
         access_token: await this.jwtService.signAsync(payload),
         id: user.id,
+        role: user.role,
       };
-    } else {
-      console.log("l'utilisateur n'existe pas");
+    } catch (error) {
+      throw new NotFoundException();
     }
   }
 
@@ -78,14 +79,9 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('Utilisateur non trouvé');
     }
-    // Générer un sel pour le hachage bcrypt
-    const saltOrRounds: number = 10;
 
     // Hasher le nouveau mot de passe
-    const hashedPassword = await bcrypt.hash(
-      updatedUserData.password,
-      saltOrRounds,
-    );
+    const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);
 
     // Mettre à jour le mot de passe dans l'objet updatedUserData
     updatedUserData.password = hashedPassword;
@@ -101,6 +97,10 @@ export class UsersService {
 
   async findOne(id: string) {
     return this.userRepository.findOne({ where: { id } });
+  }
+
+  async deleteOne(id: string) {
+    return this.userRepository.delete(id);
   }
 
   // Fonction pour récupérer un utilisateur spécifique par ID

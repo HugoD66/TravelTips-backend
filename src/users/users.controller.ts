@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Post,
@@ -7,10 +8,10 @@ import {
   HttpStatus,
   HttpCode,
   Get,
-  Req,
   UseGuards,
   Param,
   Patch,
+  Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -54,6 +55,12 @@ export class UsersController {
     @Body() updateUserDto: CreateUserDto,
   ) {
     const user = this.usersService.updateUser(userId, updateUserDto);
+    return user;
+  }
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  async deleteUserById(@Param('id') userId: string) {
+    const user = this.usersService.deleteOne(userId);
     return user;
   }
 }

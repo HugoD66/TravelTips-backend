@@ -26,6 +26,10 @@ export class Tip {
   adress: string;
   @Column()
   price: number;
+  @Column()
+  approvate: boolean;
+  @Column()
+  public: boolean;
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })

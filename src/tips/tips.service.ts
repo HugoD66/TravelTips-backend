@@ -2,7 +2,6 @@
 
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateTipDto } from './dto/create-tip.dto';
-import { UpdateTipDto } from './dto/update-tip.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tip } from './entities/tip.entity';
 import { Repository } from 'typeorm';

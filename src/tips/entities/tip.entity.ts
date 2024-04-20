@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { City } from 'src/city/entities/city.entity';
 import { DayItinerary } from 'src/day-itinerary/entities/day-itinerary.entity';
 import { Rate } from 'src/rate/entities/rate.entity';
@@ -24,7 +23,6 @@ export class Tip {
   adress: string;
   @Column()
   price: number;
-
   @Column()
   approvate: boolean;
 

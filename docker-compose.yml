@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: 'adminTravelTips'
       POSTGRES_DB: 'travelTips'
     ports:
-      - '5432:5432'
+      - '5700:5432'
     volumes:
       - postgres_data:/bitnami/postgresql
 

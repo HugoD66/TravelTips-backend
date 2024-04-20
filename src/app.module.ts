@@ -26,32 +26,6 @@ import User from './users/entities/user.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: +configService.get<number>('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        entities: [
-          Itinerary,
-          DayItinerary,
-          Tip,
-          Rate,
-          Category,
-          Comment,
-          Country,
-          User,
-          City,
-          Picture,
-        ],
-        synchronize: true,
-      }),
-      inject: [ConfigService],
-    }),
     ItineraryModule,
     DayItineraryModule,
     TipsModule,
@@ -62,6 +36,35 @@ import User from './users/entities/user.entity';
     CityModule,
     PictureModule,
     FixturesModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => {
+        const dbConfig = {
+          type: `postgres` as const,
+          host: configService.get('DB_HOST'),
+          port: +configService.get<number>('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_NAME'),
+          entities: [
+            Itinerary,
+            DayItinerary,
+            Tip,
+            Rate,
+            Category,
+            Comment,
+            Country,
+            User,
+            City,
+            Picture,
+          ],
+          synchronize: true,
+        };
+        return dbConfig;
+      },
+      inject: [ConfigService],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

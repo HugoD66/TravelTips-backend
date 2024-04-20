@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 4000
 
 # Commande pour démarrer votre application avec Docker Compose
-CMD ["docker-compose", "up";"npm", "run", "start:dev" ]
+CMD ["docker-compose", "up","npm", "run", "start:dev" ]

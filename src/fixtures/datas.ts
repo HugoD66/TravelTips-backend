@@ -54,10 +54,26 @@ export class Mockups {
 
   async generateUser() {
     await this.usersService.create({
-      firstName: 'Jean',
-      lastName: 'Dupont',
+      firstName: 'JeanAdmin',
+      lastName: 'DupontAdmin',
       birthday: '1990-05-15',
-      mail: 'jeandupont@example.com',
+      mail: 'jeandupontadmin@example.com',
+      role: UserRole.Admin,
+      password: 'Azeaze.11',
+    });
+    await this.usersService.create({
+      firstName: 'JeanUser',
+      lastName: 'DupontUser',
+      birthday: '1990-05-15',
+      mail: 'jeandupontuser@example.com',
+      role: UserRole.User,
+      password: 'Azeaze.11',
+    });
+    await this.usersService.create({
+      firstName: 'Jeanne',
+      lastName: 'Dupontne',
+      birthday: '1990-05-15',
+      mail: 'jeannedupont@example.com',
       role: UserRole.User,
       password: 'Azeaze.11',
     });
@@ -87,9 +103,10 @@ export class Mockups {
 
     await this.tipsService.create({
       name: 'Café de la Gare',
-      numberAdress: 1,
       adress: 'Place de la Comédie',
       price: 3,
+      approvate: true,
+      public: true,
       idUser: user[Math.floor(Math.random() * user.length)].id,
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
     });

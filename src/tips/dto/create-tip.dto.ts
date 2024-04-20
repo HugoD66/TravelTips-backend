@@ -3,10 +3,6 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateTipDto {
   @IsNotEmpty()
   name: string;
-
-  @IsNotEmpty()
-  numberAdress: number;
-
   @IsNotEmpty()
   adress: string;
   @IsNotEmpty()
@@ -15,4 +11,8 @@ export class CreateTipDto {
   price: number;
   @IsNotEmpty()
   idUser: string;
+  @IsNotEmpty()
+  approvate: boolean;
+  @IsNotEmpty()
+  public: boolean;
 }

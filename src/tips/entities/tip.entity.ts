@@ -21,13 +21,13 @@ export class Tip {
   @Column()
   name: string;
   @Column()
-  numberAdress: number;
-  @Column()
   adress: string;
   @Column()
   price: number;
+
   @Column()
   approvate: boolean;
+
   @Column()
   public: boolean;
 

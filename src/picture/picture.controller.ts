@@ -41,8 +41,9 @@ export class PictureController {
   async addPicture(
     @Param('userId') userId: string,
     @Param('tipsId') tipsId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(FileSizeValidationPipe) file: Express.Multer.File,
   ): Promise<Picture> {
+    console.log('file', file);
     if (!file) {
       throw new BadRequestException('No file uploaded');
     }

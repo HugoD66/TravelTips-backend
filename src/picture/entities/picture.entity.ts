@@ -15,7 +15,10 @@ export class Picture {
   @Column()
   url!: string;
 
-  @ManyToOne(() => Tip, (tip) => tip.id)
+  @Column()
+  createdBy: string;
+
+  @ManyToOne(() => Tip, (tip) => tip.pictures)
   @JoinColumn({ name: 'idTips' })
   idTips!: Tip;
 }

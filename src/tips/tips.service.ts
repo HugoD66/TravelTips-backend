@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateTipDto } from './dto/create-tip.dto';
 import { UpdateTipDto } from './dto/update-tip.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -42,9 +42,32 @@ export class TipsService {
   async findOneByUser(userId: string): Promise<Tip[]> {
     return this.tipRepository.find({ where: { idUser: { id: userId } } });
   }
-  async update(id: string, updateTipDto: UpdateTipDto) {
-    return this.tipRepository.update(id, updateTipDto);
+
+
+  async update(id: string, updateTipDto: Partial<Tip>): Promise<Tip> {
+    const tip: Tip = await this.tipRepository.findOne({ where: { id } });
+    if (!tip) {
+      throw new NotFoundException(`Tip not found with id ${id}`);
+    }
+    const updatedTip = this.tipRepository.merge(tip, updateTipDto);
+    await this.tipRepository.save(updatedTip);
+    return updatedTip;
   }
+
+
+  /* async update(userId, updateTipDto: UpdateTipDto) {
+     const tips = await this.tipRepository.findOne({ where: { id: updateTipDto.id } });
+     if(!tips) {
+       throw new NotFoundException(`Tips not found`);
+     }
+     const updatedTip = {
+       ...tips,
+       ...updateTipDto,
+     }
+     await this.tipRepository.save(updateTipDto);
+     return updatedTip;
+   }
+   */
 
   async remove(id: string) {
     return this.tipRepository.delete(id);

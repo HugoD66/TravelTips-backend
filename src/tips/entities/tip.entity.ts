@@ -49,5 +49,5 @@ export class Tip {
   dayItinerary?: DayItinerary[];
 
   @OneToMany(() => Picture, (picture) => picture.idTips)
-  picture?: Picture[];
+  pictures?: Picture;
 }

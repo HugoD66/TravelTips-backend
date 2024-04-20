@@ -2,7 +2,11 @@
 import { IsNotEmpty } from 'class-validator';
 export class CreatePictureDto {
   @IsNotEmpty()
-  idTips!: string;
+  url: string;
+
   @IsNotEmpty()
-  url!: string;
+  createdBy: string;
+
+  @IsNotEmpty()
+  tipsId: string;
 }

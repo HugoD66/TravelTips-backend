@@ -24,6 +24,13 @@ export class CountryService {
     return await this.countryRepository.findOne({ where: { id } });
   }
 
+  async findOneByName(countryName: string) {
+    return await this.countryRepository.findOne({
+      where: { name: countryName },
+      relations: ['city'],
+    });
+  }
+
   async update(id: string, updateCountryDto: UpdateCountryDto) {
     return await this.countryRepository.update(id, updateCountryDto);
   }

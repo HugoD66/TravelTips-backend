@@ -25,6 +25,11 @@ export class CountryController {
     return this.countryService.findAll();
   }
 
+  @Get('/get-by-name/:countryName')
+  async findOneByName(@Param('countryName') countryName: string) {
+    return this.countryService.findOneByName(countryName);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.countryService.findOne(id);

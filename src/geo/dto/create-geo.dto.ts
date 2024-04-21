@@ -1,5 +1,4 @@
 import { IsNotEmpty } from 'class-validator';
-import { Geo } from '../entities/geo.entity';
 
 export class CreateGeoDto {
   @IsNotEmpty()

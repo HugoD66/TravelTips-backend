@@ -21,7 +21,11 @@ export class Geo {
   lng!: string;
 
   @ManyToOne(() => Country, (country) => country.geoCoords)
+  @JoinColumn({ name: 'countryId' })
   country!: Country;
+
+  @Column({ nullable: true })
+  countryId: string;
 
   @OneToOne(() => Tip)
   @JoinColumn()

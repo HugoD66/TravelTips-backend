@@ -12,6 +12,11 @@ export class GeoService {
     private geoRepository: Repository<Geo>,
   ) {}
   async create(createGeoDto: CreateGeoDto) {
+    console.log(createGeoDto);
+    console.log(createGeoDto);
+    console.log(createGeoDto);
+    console.log(createGeoDto);
+    console.log(createGeoDto);
     const geo = this.geoRepository.create(createGeoDto);
     return await this.geoRepository.save(geo);
   }

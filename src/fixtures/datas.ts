@@ -69,20 +69,26 @@ export class Mockups {
       name: 'France',
     });
   }
-  async generateGeo() {
-    const countryList = await this.countryService.findAll();
-    await this.geoService.create({
-      lat: '44.837789',
-      lng: '-0.57918',
-      countryId: countryList[Math.floor(Math.random() * countryList.length)].id,
-    });
-  }
+
   async generateCity() {
     const countryList = await this.countryService.findAll();
     await this.cityService.create({
       name: 'Bordeaux',
       zipCode: '33000',
       idCountry: countryList[Math.floor(Math.random() * countryList.length)].id,
+    });
+  }
+
+  async generateGeo() {
+    const countryList = await this.countryService.findAll();
+    const randomCountry =
+      countryList[Math.floor(Math.random() * countryList.length)];
+    // console.log(randomCountry); Country { id: '48ff1a74-7773-4bf3-8dab-9fc2e1dee5ed', name: 'France' }
+
+    await this.geoService.create({
+      lat: '44.837789',
+      lng: '-0.57918',
+      countryId: randomCountry.id,
     });
   }
 

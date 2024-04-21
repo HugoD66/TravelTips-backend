@@ -1,15 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 import { FixturesService } from './fixtures.service';
-import { CreateFixtureDto } from './dto/create-fixture.dto';
-import { UpdateFixtureDto } from './dto/update-fixture.dto';
 
 @Controller('fixtures')
 export class FixturesController {

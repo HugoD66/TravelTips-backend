@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import User, { UserRole } from '../users/entities/user.entity';
+import { UserRole } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { CountryService } from '../country/country.service';
 import { CityService } from '../city/city.service';
@@ -9,6 +9,7 @@ import { RateService } from '../rate/rate.service';
 import { CommentService } from '../comment/comment.service';
 import { ItineraryService } from '../itinerary/itinerary.service';
 import { DayItineraryService } from '../day-itinerary/day-itinerary.service';
+import { GeoService } from '../geo/geo.service';
 
 @Injectable()
 export class Mockups {
@@ -22,12 +23,14 @@ export class Mockups {
     private commentService: CommentService,
     private itineraryService: ItineraryService,
     private dayItineraryService: DayItineraryService,
+    private geoService: GeoService,
   ) {}
   async seedAll() {
     await this.generateUser();
     await this.generateCountry();
     await this.generateCity();
     await this.generateCategory();
+    await this.generateGeo();
     await this.generateTips();
     await this.generateRate();
     await this.generateComment();
@@ -66,6 +69,14 @@ export class Mockups {
       name: 'France',
     });
   }
+  async generateGeo() {
+    const countryList = await this.countryService.findAll();
+    await this.geoService.create({
+      lat: '44.837789',
+      lng: '-0.57918',
+      countryId: countryList[Math.floor(Math.random() * countryList.length)].id,
+    });
+  }
   async generateCity() {
     const countryList = await this.countryService.findAll();
     await this.cityService.create({
@@ -83,6 +94,7 @@ export class Mockups {
   async generateTips() {
     const cityList = await this.cityService.findAll();
     const user = await this.usersService.findAll();
+    const geo = await this.geoService.findAll();
 
     await this.tipsService.create({
       name: 'Café de la Gare',
@@ -92,6 +104,7 @@ export class Mockups {
       public: true,
       idUser: user[Math.floor(Math.random() * user.length)].id,
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
+      geo: geo[Math.floor(Math.random() * geo.length)],
     });
   }
   async generateRate() {

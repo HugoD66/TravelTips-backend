@@ -27,7 +27,7 @@ export class CountryService {
   async findOneByName(countryName: string) {
     return await this.countryRepository.findOne({
       where: { name: countryName },
-      relations: ['city'],
+      relations: ['city', 'geoCoords'],
     });
   }
 

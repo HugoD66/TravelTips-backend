@@ -6,16 +6,11 @@ import {
   Body,
   Patch,
   Param,
-  Delete, UseGuards, UseInterceptors, UploadedFile,
-
+  Delete
 } from "@nestjs/common";
 import { TipsService } from './tips.service';
 import { CreateTipDto } from './dto/create-tip.dto';
 import { UpdateTipDto } from './dto/update-tip.dto';
-import { AuthGuard } from "../auth/auth.gards";
-import { FileInterceptor } from '@nestjs/platform-express';
-import { multerConfig } from "../multer.config";
-import { FileSizeValidationPipe } from "../pipe/FileSizeValidationPipe";
 
 @Controller('tips')
 export class TipsController {

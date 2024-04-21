@@ -22,7 +22,9 @@ import { City } from './city/entities/city.entity';
 import { Picture } from './picture/entities/picture.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FixturesModule } from './fixtures/fixtures.module';
+import { GeoModule } from './geo/geo.module';
 import User from './users/entities/user.entity';
+import { Geo } from './geo/entities/geo.entity';
 
 @Module({
   imports: [
@@ -36,6 +38,7 @@ import User from './users/entities/user.entity';
     CityModule,
     PictureModule,
     FixturesModule,
+    GeoModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -58,6 +61,7 @@ import User from './users/entities/user.entity';
             User,
             City,
             Picture,
+            Geo,
           ],
           synchronize: true,
         };
@@ -65,6 +69,7 @@ import User from './users/entities/user.entity';
       },
       inject: [ConfigService],
     }),
+    GeoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

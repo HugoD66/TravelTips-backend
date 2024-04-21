@@ -11,8 +11,10 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { Picture } from 'src/picture/entities/picture.entity';
+import { Geo } from '../../geo/entities/geo.entity';
 @Entity()
 export class Tip {
   @PrimaryGeneratedColumn('uuid')
@@ -47,5 +49,8 @@ export class Tip {
   dayItinerary?: DayItinerary[];
 
   @OneToMany(() => Picture, (picture) => picture.idTips)
-  pictures?: Picture;
+  pictures?: Picture; //Picture[] ?
+
+  @OneToOne(() => Geo, (geo) => geo.tip)
+  geo!: Geo;
 }

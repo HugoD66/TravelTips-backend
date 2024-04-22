@@ -9,7 +9,6 @@ import { RateService } from '../rate/rate.service';
 import { CommentService } from '../comment/comment.service';
 import { ItineraryService } from '../itinerary/itinerary.service';
 import { DayItineraryService } from '../day-itinerary/day-itinerary.service';
-import { GeoService } from '../geo/geo.service';
 import { TipsApprovate } from 'src/tips/entities/tip.entity';
 
 @Injectable()
@@ -24,14 +23,12 @@ export class Mockups {
     private commentService: CommentService,
     private itineraryService: ItineraryService,
     private dayItineraryService: DayItineraryService,
-    private geoService: GeoService,
   ) {}
   async seedAll() {
     await this.generateUser();
     await this.generateCountry();
     await this.generateCity();
     await this.generateCategory();
-    await this.generateGeo();
     await this.generateTips();
     await this.generateRate();
     await this.generateComment();
@@ -80,19 +77,6 @@ export class Mockups {
     });
   }
 
-  async generateGeo() {
-    const countryList = await this.countryService.findAll();
-    const randomCountry =
-      countryList[Math.floor(Math.random() * countryList.length)];
-    // console.log(randomCountry); Country { id: '48ff1a74-7773-4bf3-8dab-9fc2e1dee5ed', name: 'France' }
-
-    await this.geoService.create({
-      lat: '44.837789',
-      lng: '-0.57918',
-      countryId: randomCountry.id,
-    });
-  }
-
   async generateCategory() {
     await this.categoryService.create({
       name: 'Tourisme',
@@ -101,7 +85,6 @@ export class Mockups {
   async generateTips() {
     const cityList = await this.cityService.findAll();
     const user = await this.usersService.findAll();
-    const geo = await this.geoService.findAll();
 
     await this.tipsService.create({
       name: 'Café de la Gare',
@@ -110,7 +93,8 @@ export class Mockups {
       approvate: TipsApprovate.Pending,
       idUser: user[Math.floor(Math.random() * user.length)].id,
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
-      geo: geo[Math.floor(Math.random() * geo.length)],
+      lat: '44.837789',
+      lng: '-0.57918',
     });
   }
   async generateRate() {

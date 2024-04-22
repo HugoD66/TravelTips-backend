@@ -12,10 +12,8 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
-  OneToOne,
 } from 'typeorm';
 import { Picture } from 'src/picture/entities/picture.entity';
-import { Geo } from '../../geo/entities/geo.entity';
 
 export enum TipsApprovate {
   Approvate = 'true',
@@ -56,6 +54,9 @@ export class Tip {
   @OneToMany(() => Picture, (picture) => picture.idTips)
   pictures?: Picture; //Picture[] ?
 
-  @OneToOne(() => Geo, (geo) => geo.tip)
-  geo!: Geo;
+  @Column()
+  lng: string;
+
+  @Column()
+  lat: string;
 }

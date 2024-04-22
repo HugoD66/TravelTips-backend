@@ -12,7 +12,6 @@ import { RateModule } from '../rate/rate.module';
 import { TipsModule } from '../tips/tips.module';
 import { UsersModule } from '../users/users.module';
 import { Mockups } from './datas';
-import { GeoModule } from '../geo/geo.module';
 
 @Module({
   imports: [
@@ -26,7 +25,6 @@ import { GeoModule } from '../geo/geo.module';
     RateModule,
     TipsModule,
     UsersModule,
-    GeoModule,
   ],
   controllers: [FixturesController],
   providers: [FixturesService, Mockups],

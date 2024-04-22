@@ -38,7 +38,7 @@ export class Tip {
   approvate: string;
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
-  idUser!: User | string;
+  idUser: User | string;
 
   @ManyToOne(() => City, (city) => city.id)
   @JoinColumn({ name: 'idCity' })

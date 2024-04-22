@@ -40,16 +40,18 @@ export class User {
   @IsOptional()
   role: UserRole;
 
-  @OneToMany(() => Itinerary, (itinerary) => itinerary.idUser)
+  @OneToMany(() => Itinerary, (itinerary) => itinerary.idUser, {
+    cascade: true,
+  })
   itinerary?: Itinerary[];
 
-  @OneToMany(() => Comment, (comment) => comment.idUser)
+  @OneToMany(() => Comment, (comment) => comment.idUser, { cascade: true })
   comment?: Comment[];
 
-  @OneToMany(() => Rate, (rate) => rate.idUser)
+  @OneToMany(() => Rate, (rate) => rate.idUser, { cascade: true })
   rate?: Rate[];
 
-  @OneToMany(() => Tip, (tip) => tip.idUser)
+  @OneToMany(() => Tip, (tip) => tip.idUser, { cascade: true })
   tip?: Tip[];
 }
 

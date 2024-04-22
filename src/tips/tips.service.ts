@@ -65,6 +65,21 @@ export class TipsService {
     return await this.tipRepository.find(options);
   }
 
+  async getTipsUser(id: string) {
+    console.log('id : ' + id);
+    // const options: FindManyOptions<Tip> = {
+    //   where:  idUser: id ,
+    //   relations: ['idUser'],
+    // };
+    // console.log('Options de requête : ', options); // Ajout d'un log pour voir les options de requête
+
+    const tips = await this.tipRepository.find({
+      where: { idUser: { id: id } },
+    });
+    //delete tips.idUser.password;
+    return tips;
+  }
+
   async findOneByUser(userId: string): Promise<Tip[]> {
     return this.tipRepository.find({ where: { idUser: { id: userId } } });
   }

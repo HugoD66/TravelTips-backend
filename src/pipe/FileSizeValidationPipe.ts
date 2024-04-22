@@ -8,7 +8,7 @@ import {
 @Injectable()
 export class FileSizeValidationPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
-    const maxSize = 50000;
+    const maxSize = 150000;
     if (value.size > maxSize) {
       throw new BadRequestException(`File is too large`);
     }

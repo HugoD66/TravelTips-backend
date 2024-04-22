@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsNotEmpty } from 'class-validator';
+import { Tip } from "../../tips/entities/tip.entity";
 export class CreatePictureDto {
   @IsNotEmpty()
   url: string;
@@ -8,5 +9,5 @@ export class CreatePictureDto {
   createdBy: string;
 
   @IsNotEmpty()
-  tipsId: string;
+  idTips: Tip;
 }

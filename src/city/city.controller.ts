@@ -21,6 +21,11 @@ export class CityController {
     return this.cityService.create(createCityDto);
   }
 
+  @Get('by-name/:name')
+  findByName(@Param('name') name: string) {
+    return this.cityService.findByName(name);
+  }
+
   @Get()
   findAll() {
     return this.cityService.findAll();

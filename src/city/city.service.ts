@@ -4,7 +4,6 @@ import { UpdateCityDto } from './dto/update-city.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { City } from './entities/city.entity';
 import { Repository } from 'typeorm';
-import { CountryService } from '../country/country.service';
 
 @Injectable()
 export class CityService {
@@ -19,6 +18,12 @@ export class CityService {
     return await this.cityRepository.save(city);
   }
 
+  async findByName(name: string) {
+    return await this.cityRepository.findOne({
+      where: { name },
+      relations: ['tips'],
+    });
+  }
   async findAll() {
     return await this.cityRepository.find();
   }

@@ -26,5 +26,6 @@ export class City {
   idCountry: Country |string;
 
   @OneToMany(() => Tip, (tip) => tip.id)
+  @JoinColumn({ name: 'idTips' })
   tips!: Tip[] |string[];
 }

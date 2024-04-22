@@ -22,6 +22,13 @@ export class TipsController {
   async create(@Body() createTipDto: CreateTipDto) {
     return this.tipsService.create(createTipDto);
   }
+
+  @Get('by-city/:cityId')
+  getTipsByCityId(@Param('cityId') cityId: string) {
+    console.log(cityId);
+    return this.tipsService.getTipsByCityId(cityId);
+  }
+
   @UseGuards(AuthGuard)
   @Patch('approvate/:id')
   async updateApprovate(@Param('id') id: string) {

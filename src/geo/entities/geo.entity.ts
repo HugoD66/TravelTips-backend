@@ -29,5 +29,5 @@ export class Geo {
 
   @OneToOne(() => Tip)
   @JoinColumn()
-  tip!: Tip;
+  tip: Tip;
 }

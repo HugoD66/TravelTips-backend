@@ -1,30 +1,25 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
-  UseGuards,
   UseInterceptors,
   UploadedFile,
   BadRequestException,
 } from '@nestjs/common';
 import { PictureService } from './picture.service';
 import { CreatePictureDto } from './dto/create-picture.dto';
-import { UpdatePictureDto } from './dto/update-picture.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from '../multer.config';
-import { AuthGuard } from '../auth/auth.gards';
 import { FileSizeValidationPipe } from '../pipe/FileSizeValidationPipe';
-import { Picture } from './entities/picture.entity';
-import { TipsService } from "../tips/tips.service";
+import { TipsService } from '../tips/tips.service';
 
 @Controller('picture')
 export class PictureController {
-  constructor(private readonly pictureService: PictureService,
-              private tipsService: TipsService) {}
+  constructor(
+    private readonly pictureService: PictureService,
+    private tipsService: TipsService,
+  ) {}
 
   //@UseGuards(AuthGuard)
   @Post('upload-file/:userId/:tipsId')

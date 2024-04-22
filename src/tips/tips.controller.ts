@@ -18,8 +18,6 @@ export class TipsController {
 
   @Post()
   async create(@Body() createTipDto: CreateTipDto) {
-    console.log('create method de tips.controller')
-    console.log(createTipDto)
     return this.tipsService.create(createTipDto);
   }
 

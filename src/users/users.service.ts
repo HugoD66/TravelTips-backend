@@ -42,7 +42,6 @@ export class UsersService {
       where: { mail: loginUserDto.mail },
     };
     const user = await this.userRepository.findOne(options);
-    console.log('le user ' + user);
     if (user == null) {
       throw new NotFoundException();
     }
@@ -79,8 +78,6 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('Utilisateur non trouvé');
     }
-
-    console.log('le mp est :' + updatedUserData.password);
 
     // Hasher le nouveau mot de passe
     const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);

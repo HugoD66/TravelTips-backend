@@ -17,8 +17,6 @@ export class TipsService {
     private cityService: CityService,
   ) {}
   async create(createTipDto: CreateTipDto) {
-    console.log('create method de tips.service')
-    console.log(createTipDto)
     /*
       const dayItinerary = this.dayItineraryRepository.create(
       createDayItineraryDto,

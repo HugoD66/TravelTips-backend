@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { City } from 'src/city/entities/city.entity';
 import { DayItinerary } from 'src/day-itinerary/entities/day-itinerary.entity';
 import { Rate } from 'src/rate/entities/rate.entity';
@@ -15,6 +16,13 @@ import {
 } from 'typeorm';
 import { Picture } from 'src/picture/entities/picture.entity';
 import { Geo } from '../../geo/entities/geo.entity';
+
+export enum TipsApprovate {
+  Approvate = 'true',
+  Disapprovate = 'false',
+  Pending = 'pending',
+}
+
 @Entity()
 export class Tip {
   @PrimaryGeneratedColumn('uuid')
@@ -25,12 +33,9 @@ export class Tip {
   adress: string;
   @Column()
   price: number;
-  @Column()
-  approvate: boolean;
 
-  @Column()
-  public: boolean;
-
+  @Column({ default: TipsApprovate.Pending })
+  approvate: string;
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
   idUser!: User | string;

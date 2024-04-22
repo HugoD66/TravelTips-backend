@@ -10,6 +10,7 @@ import { CommentService } from '../comment/comment.service';
 import { ItineraryService } from '../itinerary/itinerary.service';
 import { DayItineraryService } from '../day-itinerary/day-itinerary.service';
 import { GeoService } from '../geo/geo.service';
+import { TipsApprovate } from 'src/tips/entities/tip.entity';
 
 @Injectable()
 export class Mockups {
@@ -106,8 +107,7 @@ export class Mockups {
       name: 'Café de la Gare',
       adress: 'Place de la Comédie',
       price: 3,
-      approvate: true,
-      public: true,
+      approvate: TipsApprovate.Pending,
       idUser: user[Math.floor(Math.random() * user.length)].id,
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
       geo: geo[Math.floor(Math.random() * geo.length)],

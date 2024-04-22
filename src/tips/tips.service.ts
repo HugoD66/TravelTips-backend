@@ -42,7 +42,7 @@ export class TipsService {
   async getPendingTips() {
     const options: FindManyOptions<Tip> = {
       where: { approvate: TipsApprovate.Pending },
-      relations: ['idUser'],
+      relations: ['idCity', 'idCity.idCountry'],
     };
     const tips = await this.tipRepository.find(options);
     //delete tips.idUser.password;
@@ -52,7 +52,7 @@ export class TipsService {
   async getApprovateTips() {
     const options: FindManyOptions<Tip> = {
       where: { approvate: TipsApprovate.Approvate },
-      relations: ['idUser'],
+      relations: ['idCity', 'idCity.idCountry'],
     };
     return await this.tipRepository.find(options);
   }
@@ -60,28 +60,17 @@ export class TipsService {
   async getDisapprovateTips() {
     const options: FindManyOptions<Tip> = {
       where: { approvate: TipsApprovate.Disapprovate },
-      relations: ['idUser'],
+      relations: ['idCity', 'idCity.idCountry'],
     };
     return await this.tipRepository.find(options);
   }
 
   async getTipsUser(id: string) {
-    console.log('id : ' + id);
-    // const options: FindManyOptions<Tip> = {
-    //   where:  idUser: id ,
-    //   relations: ['idUser'],
-    // };
-    // console.log('Options de requête : ', options); // Ajout d'un log pour voir les options de requête
-
     const tips = await this.tipRepository.find({
       where: { idUser: { id: id } },
+      relations: ['idCity', 'idCity.idCountry'],
     });
-    //delete tips.idUser.password;
     return tips;
-  }
-
-  async findOneByUser(userId: string): Promise<Tip[]> {
-    return this.tipRepository.find({ where: { idUser: { id: userId } } });
   }
 
   async update(id: string, updateTipDto: Partial<Tip>): Promise<Tip> {
@@ -116,16 +105,11 @@ export class TipsService {
       where: { id: id },
     };
     const tip = await this.tipRepository.findOne(options);
-
-    // Si le tip existe
     if (!tip) {
       throw new Error('Tip not found');
     }
-
-    // Mettre à jour la propriété "approvate" à true
     tip.approvate = TipsApprovate.Approvate;
 
-    // Enregistrer les modifications dans la base de données
     await this.tipRepository.save(tip);
 
     return tip;
@@ -136,18 +120,11 @@ export class TipsService {
       where: { id: id },
     };
     const tip = await this.tipRepository.findOne(options);
-
-    // Si le tip existe
     if (!tip) {
       throw new Error('Tip not found');
     }
-
-    // Mettre à jour la propriété "approvate" à true
     tip.approvate = TipsApprovate.Disapprovate;
-
-    // Enregistrer les modifications dans la base de données
     await this.tipRepository.save(tip);
-
     return tip;
   }
 }

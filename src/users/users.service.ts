@@ -80,6 +80,8 @@ export class UsersService {
       throw new NotFoundException('Utilisateur non trouvé');
     }
 
+    console.log('le mp est :' + updatedUserData.password);
+
     // Hasher le nouveau mot de passe
     const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);
 

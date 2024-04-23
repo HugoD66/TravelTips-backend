@@ -10,6 +10,7 @@ import { CommentService } from '../comment/comment.service';
 import { ItineraryService } from '../itinerary/itinerary.service';
 import { DayItineraryService } from '../day-itinerary/day-itinerary.service';
 import { TipsApprovate } from 'src/tips/entities/tip.entity';
+import { PictureService } from '../picture/picture.service';
 
 @Injectable()
 export class Mockups {
@@ -23,6 +24,7 @@ export class Mockups {
     private commentService: CommentService,
     private itineraryService: ItineraryService,
     private dayItineraryService: DayItineraryService,
+    private pictureService: PictureService,
   ) {}
   async seedAll() {
     await this.generateUser();
@@ -30,6 +32,7 @@ export class Mockups {
     await this.generateCity();
     await this.generateCategory();
     await this.generateTips();
+    await this.generatePictures();
     await this.generateRate();
     await this.generateComment();
     await this.generateItinerary();
@@ -61,10 +64,43 @@ export class Mockups {
       role: UserRole.User,
       password: 'Azeaze.11',
     });
+    await this.usersService.create({
+      firstName: 'Hugo',
+      lastName: 'Dessauw',
+      birthday: '1992-09-22',
+      mail: 'aze@aze.com',
+      role: UserRole.User,
+      password: 'Azeaze.11',
+    });
   }
   async generateCountry() {
     await this.countryService.create({
       name: 'France',
+    });
+  }
+
+  async generatePictures() {
+    const tip = await this.tipsService.findAll();
+    const user = await this.usersService.findAll();
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-1.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-2.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-3.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-4.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
     });
   }
 
@@ -125,6 +161,7 @@ export class Mockups {
       createdAt: new Date(),
     });
   }
+
   async generateRate() {
     const user = await this.usersService.findAll();
     const tips = await this.tipsService.findAll();

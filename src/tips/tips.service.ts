@@ -39,8 +39,13 @@ export class TipsService {
     return this.tipRepository.findOne({ where: { id } });
   }
 
-  async getTipsByCityId(cityId: string) {
-    return this.tipRepository.findOne({ where: { idCity: { id: cityId } } });
+  async getTipsByCityName(cityName: string) {
+    const options: FindManyOptions<Tip> = {
+      where: { idCity: { idCountry: {name: cityName} }},
+      relations: ['idCity', 'idCity.idCountry'],
+    };
+    const resultTips = await this.tipRepository.find(options)
+    return resultTips;
   }
 
   async getPendingTips() {

@@ -12,8 +12,16 @@ export class CountryService {
     private countryRepository: Repository<Country>,
   ) {}
   async create(createCountryDto: CreateCountryDto) {
-    const country = this.countryRepository.create(createCountryDto);
-    return await this.countryRepository.save(country);
+    const countryName = createCountryDto.name;
+    const isAtleastSameCountryInDb = await this.countryRepository.findOne({
+      where: { name: countryName },
+    });
+    if (isAtleastSameCountryInDb) {
+      return isAtleastSameCountryInDb;
+    } else {
+      const country = this.countryRepository.create(createCountryDto);
+      return await this.countryRepository.save(country);
+    }
   }
 
   async findAll() {

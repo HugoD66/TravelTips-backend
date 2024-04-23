@@ -23,10 +23,10 @@ export class TipsController {
     return this.tipsService.create(createTipDto);
   }
 
-  @Get('by-city/:cityId')
-  getTipsByCityId(@Param('cityId') cityId: string) {
-    console.log(cityId);
-    return this.tipsService.getTipsByCityId(cityId);
+  @UseGuards(AuthGuard)
+  @Get('by-city/:cityName')
+  getTipsByCityName(@Param('cityName') cityName: string) {
+    return this.tipsService.getTipsByCityName(cityName);
   }
 
   @UseGuards(AuthGuard)

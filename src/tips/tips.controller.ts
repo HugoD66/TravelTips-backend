@@ -36,6 +36,12 @@ export class TipsController {
   }
 
   @UseGuards(AuthGuard)
+  @Get('by-name/:name')
+  getTipsByName(@Param('name') name: string) {
+    return this.tipsService.getTipsByName(name);
+  }
+
+  @UseGuards(AuthGuard)
   @Patch('approvate/:id')
   async updateApprovate(@Param('id') id: string) {
     return this.tipsService.approvateTips(id);

@@ -34,7 +34,9 @@ export class TipsService {
   async findAll() {
     return this.tipRepository.find();
   }
-
+  async getTipsByName(name: string) {
+    return this.tipRepository.findOne({where: {name: name}})
+  }
   async findOne(id: string) {
     return this.tipRepository.findOne({ where: { id } });
   }

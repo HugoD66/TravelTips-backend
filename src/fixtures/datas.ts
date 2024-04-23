@@ -107,6 +107,7 @@ export class Mockups {
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
       lat: '44.827789',
       lng: '-0.50918',
+      nbApprovate: 1,
     });
 
     await this.tipsService.create({
@@ -118,6 +119,7 @@ export class Mockups {
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
       lat: '44.821189',
       lng: '-0.5618',
+      nbApprovate: 2,
     });
   }
   async generateRate() {

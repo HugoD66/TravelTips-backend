@@ -136,4 +136,13 @@ export class TipsService {
     await this.tipRepository.save(tip);
     return tip;
   }
+
+  async getLatestTips(): Promise<Tip[]> {
+    return await this.tipRepository.find({
+      order: {
+        createdAt: 'DESC'
+      },
+      take: 6
+    });
+  }
 }

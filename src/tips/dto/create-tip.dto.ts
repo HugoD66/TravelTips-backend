@@ -18,4 +18,6 @@ export class CreateTipDto {
   @IsNotEmpty()
   lat: string;
   nbApprovate: number;
+  @IsNotEmpty()
+  createdAt: Date;
 }

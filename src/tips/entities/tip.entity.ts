@@ -11,8 +11,8 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-  OneToMany,
-} from 'typeorm';
+  OneToMany, CreateDateColumn
+} from "typeorm";
 import { Picture } from 'src/picture/entities/picture.entity';
 
 export enum TipsApprovate {
@@ -62,4 +62,7 @@ export class Tip {
 
   @Column({ default: 3 })
   nbApprobation: number;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  createdAt: Date;
 }

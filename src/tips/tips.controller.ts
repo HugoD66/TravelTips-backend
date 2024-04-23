@@ -24,6 +24,12 @@ export class TipsController {
   }
 
   @UseGuards(AuthGuard)
+  @Get('latest')
+  getLatestTips() {
+    return this.tipsService.getLatestTips();
+  }
+
+  @UseGuards(AuthGuard)
   @Get('by-city/:cityName')
   getTipsByCityName(@Param('cityName') cityName: string) {
     return this.tipsService.getTipsByCityName(cityName);
@@ -80,4 +86,6 @@ export class TipsController {
   async remove(@Param('id') id: string) {
     return this.tipsService.remove(id);
   }
+
+
 }

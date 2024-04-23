@@ -96,6 +96,7 @@ export class Mockups {
       lat: '44.837789',
       lng: '-0.57918',
       nbApprovate: 3,
+      createdAt: new Date(),
     });
 
     await this.tipsService.create({
@@ -108,6 +109,7 @@ export class Mockups {
       lat: '44.827789',
       lng: '-0.50918',
       nbApprovate: 1,
+      createdAt: new Date(),
     });
 
     await this.tipsService.create({
@@ -120,6 +122,7 @@ export class Mockups {
       lat: '44.821189',
       lng: '-0.5618',
       nbApprovate: 2,
+      createdAt: new Date(),
     });
   }
   async generateRate() {

@@ -4,7 +4,7 @@ export class CreateTipDto {
   @IsNotEmpty()
   name: string;
   @IsNotEmpty()
-  adress: string;
+  address: string;
   @IsNotEmpty()
   idCity: string;
   @IsNotEmpty()

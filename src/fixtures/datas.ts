@@ -88,7 +88,7 @@ export class Mockups {
 
     await this.tipsService.create({
       name: 'Café de la Gare',
-      adress: 'Place de la Comédie',
+      address: 'Place de la Comédie',
       price: 3,
       approvate: TipsApprovate.Pending,
       idUser: user[Math.floor(Math.random() * user.length)].id,
@@ -96,6 +96,28 @@ export class Mockups {
       lat: '44.837789',
       lng: '-0.57918',
       nbApprovate: 3,
+    });
+
+    await this.tipsService.create({
+      name: 'Lieux agréable',
+      address: 'Place de la Bourse',
+      price: 1,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
+      lat: '44.827789',
+      lng: '-0.50918',
+    });
+
+    await this.tipsService.create({
+      name: 'Nature découverte',
+      address: 'Place de la nature',
+      price: 1,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
+      lat: '44.821189',
+      lng: '-0.5618',
     });
   }
   async generateRate() {

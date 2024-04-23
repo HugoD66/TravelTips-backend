@@ -28,7 +28,7 @@ export class Tip {
   @Column()
   name: string;
   @Column()
-  adress: string;
+  address: string;
   @Column()
   price: number;
 

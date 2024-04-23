@@ -142,7 +142,7 @@ export class TipsService {
       order: {
         createdAt: 'DESC'
       },
-      take: 6
+      take: 6,
     });
   }
 }

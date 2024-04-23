@@ -86,6 +86,4 @@ export class TipsController {
   async remove(@Param('id') id: string) {
     return this.tipsService.remove(id);
   }
-
-
 }

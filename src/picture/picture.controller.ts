@@ -5,8 +5,8 @@ import {
   Param,
   UseInterceptors,
   UploadedFile,
-  BadRequestException,
-} from '@nestjs/common';
+  BadRequestException, Get
+} from "@nestjs/common";
 import { PictureService } from './picture.service';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -42,6 +42,14 @@ export class PictureController {
     console.log(createPictureDto);
 
     return await this.pictureService.create(createPictureDto);
+  }
+
+  @Get(':tipsId')
+  async getPictures(@Param('tipsId') tipsId: string) {
+    const tipsList =  await this.pictureService.findByTips(tipsId);
+
+    console.log(tipsList);
+    return tipsList;
   }
   @Post()
   create(@Body() createPictureDto: CreatePictureDto) {

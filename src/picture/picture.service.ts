@@ -14,4 +14,7 @@ export class PictureService {
     const picture = this.pictureRepository.create(createPictureDto);
     return await this.pictureRepository.save(picture);
   }
+  async findByTips(tipsId: string): Promise<Picture[]> {
+    return await this.pictureRepository.find({ where: { idTips : { id: tipsId} }, relations: ['idTips'] });
+  }
 }

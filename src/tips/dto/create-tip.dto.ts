@@ -17,4 +17,5 @@ export class CreateTipDto {
   lng: string;
   @IsNotEmpty()
   lat: string;
+  nbApprovate: number;
 }

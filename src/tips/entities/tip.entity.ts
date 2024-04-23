@@ -59,4 +59,7 @@ export class Tip {
 
   @Column()
   lat: string;
+
+  @Column({ default: 3 })
+  nbApprobation: number;
 }

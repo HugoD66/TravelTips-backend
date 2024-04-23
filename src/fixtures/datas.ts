@@ -95,6 +95,7 @@ export class Mockups {
       idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
       lat: '44.837789',
       lng: '-0.57918',
+      nbApprovate: 3,
     });
   }
   async generateRate() {

@@ -16,6 +16,7 @@ export class TipsService {
     private userService: UsersService,
     private cityService: CityService,
   ) {}
+
   async create(createTipDto: CreateTipDto) {
     /*
       const dayItinerary = this.dayItineraryRepository.create(

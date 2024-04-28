@@ -28,6 +28,9 @@ export class Itinerary {
   @Column()
   lastDay: Date;
 
+  @Column({ default: true })
+  public: boolean;
+
   @ManyToOne(() => Category, (category) => category.id)
   @JoinColumn({ name: 'idCategory' })
   idCategory: Category;

@@ -35,7 +35,7 @@ export class TipsService {
     return this.tipRepository.find();
   }
   async getTipsByName(name: string) {
-    return this.tipRepository.findOne({where: {name: name}})
+    return this.tipRepository.findOne({ where: { name: name } });
   }
   async findOne(id: string) {
     return this.tipRepository.findOne({ where: { id } });
@@ -43,10 +43,10 @@ export class TipsService {
 
   async getTipsByCityName(cityName: string) {
     const options: FindManyOptions<Tip> = {
-      where: { idCity: { idCountry: {name: cityName} }},
+      where: { idCity: { idCountry: { name: cityName } } },
       relations: ['idCity', 'idCity.idCountry'],
     };
-    const resultTips = await this.tipRepository.find(options)
+    const resultTips = await this.tipRepository.find(options);
     return resultTips;
   }
 
@@ -92,6 +92,15 @@ export class TipsService {
     const updatedTip = this.tipRepository.merge(tip, updateTipDto);
     await this.tipRepository.save(updatedTip);
     return updatedTip;
+  }
+
+  async getTipsByCountry(name: string) {
+    const tips = await this.tipRepository.find({
+      where: { idCity: { idCountry: { name: name } } },
+      relations: ['idCity', 'idCity.idCountry', 'idUser'],
+    });
+    console.log('les tips de ' + name + 'sont ' + tips);
+    return tips;
   }
 
   /* async update(userId, updateTipDto: UpdateTipDto) {
@@ -142,7 +151,7 @@ export class TipsService {
   async getLatestTips(): Promise<Tip[]> {
     return await this.tipRepository.find({
       order: {
-        createdAt: 'DESC'
+        createdAt: 'DESC',
       },
       take: 6,
     });

@@ -3,9 +3,10 @@ import { CountryService } from './country.service';
 import { CountryController } from './country.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Country } from './entities/country.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Country])],
+  imports: [JwtModule, TypeOrmModule.forFeature([Country])],
   controllers: [CountryController],
   providers: [CountryService],
   exports: [CountryService, TypeOrmModule],

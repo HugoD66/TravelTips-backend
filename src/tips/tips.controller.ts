@@ -92,4 +92,9 @@ export class TipsController {
   async remove(@Param('id') id: string) {
     return this.tipsService.remove(id);
   }
+  @UseGuards(AuthGuard)
+  @Get('by-country/:name')
+  async getTipsByCountry(@Param('name') name: string) {
+    return this.tipsService.getTipsByCountry(name);
+  }
 }

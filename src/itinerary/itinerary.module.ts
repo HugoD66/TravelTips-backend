@@ -3,9 +3,10 @@ import { ItineraryService } from './itinerary.service';
 import { ItineraryController } from './itinerary.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Itinerary } from './entities/itinerary.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Itinerary])],
+  imports: [JwtModule, TypeOrmModule.forFeature([Itinerary])],
   controllers: [ItineraryController],
   providers: [ItineraryService],
   exports: [ItineraryService, TypeOrmModule],

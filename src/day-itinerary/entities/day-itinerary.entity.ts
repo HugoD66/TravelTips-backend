@@ -15,7 +15,7 @@ export class DayItinerary {
   id: string;
 
   @Column()
-  OrderInDay: number;
+  slot: string;
 
   @IsDateString()
   @Column()

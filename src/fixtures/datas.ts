@@ -210,7 +210,7 @@ export class Mockups {
 
     await this.dayItineraryService.create({
       idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      OrderInDay: 1,
+      slot: '10h - 11h',
       date: new Date(),
       idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
       idTips: tips[Math.floor(Math.random() * tips.length)].id,

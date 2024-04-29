@@ -10,6 +10,13 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import { TipsApprovate } from "../../tips/entities/tip.entity";
+
+export enum ItineraryApprovate {
+  Approvate = 'true',
+  Disapprovate = 'false',
+  Pending = 'pending',
+}
 
 @Entity()
 export class Itinerary {
@@ -33,12 +40,18 @@ export class Itinerary {
 
   @ManyToOne(() => Category, (category) => category.id)
   @JoinColumn({ name: 'idCategory' })
-  idCategory: Category;
+  idCategory: Category | string;
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
-  idUser: User;
+  idUser: User  | string;
+
+  @Column({ default: ItineraryApprovate.Pending })
+  approvate: string;
+
+  @Column({ default: 3 })
+  nbApprobation: number;
 
   @OneToMany(() => DayItinerary, (dayItinerary) => dayItinerary.idItinerary)
-  dayItinerary!: DayItinerary[];
+  dayItinerary!: DayItinerary[] | string[];
 }

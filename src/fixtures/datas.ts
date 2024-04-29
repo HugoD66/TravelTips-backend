@@ -114,8 +114,11 @@ export class Mockups {
   }
 
   async generateCategory() {
+    const itineraryList = await this.itineraryService.findAll();
+
     await this.categoryService.create({
       name: 'Tourisme',
+      idItinerary: itineraryList[Math.floor(Math.random() * itineraryList.length)][0].id,
     });
   }
   async generateTips() {
@@ -199,6 +202,10 @@ export class Mockups {
       numberDay: 3,
       dayOne: dayOne,
       lastDay: lastDay,
+      nbApprovate: 2,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: ['1'],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
     });

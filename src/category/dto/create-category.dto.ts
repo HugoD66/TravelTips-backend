@@ -4,4 +4,5 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   @MinLength(3)
   name!: string;
+  idItinerary: string[];
 }

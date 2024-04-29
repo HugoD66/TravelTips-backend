@@ -19,10 +19,9 @@ export class ItineraryService {
   }
 
   async findAll() {
-    const options: FindManyOptions<Itinerary> = {
-      relations: ['idCategorie', 'idUser'],
-    };
-    return this.itineraryRepository.find(options);
+    return this.itineraryRepository.find({
+      relations: ['idUser', 'idCategory'],
+    });
   }
 
   async findOne(id: string) {

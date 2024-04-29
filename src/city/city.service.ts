@@ -18,12 +18,6 @@ export class CityService {
     return await this.cityRepository.save(city);
   }
 
-  async fixtureCityGeneration(name: string) {
-    return await this.cityRepository.findOne({
-      where: { name },
-    });
-  }
-
   async findByName(name: string) {
     return await this.cityRepository.findOne({
       where: { name },

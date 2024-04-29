@@ -31,11 +31,11 @@ export class Mockups {
     await this.generateCountry();
     await this.generateCity();
     await this.generateCategory();
+    await this.generateItinerary();
     await this.generateTips();
     await this.generatePictures();
     await this.generateRate();
     await this.generateComment();
-    await this.generateItinerary();
     await this.generateInineraryDay();
   }
 
@@ -195,8 +195,6 @@ export class Mockups {
   }
 
   async generateCategory() {
-    const itineraryList = await this.itineraryService.findAll();
-
     await this.categoryService.create({
       name: 'Tourisme',
       idItinerary: [],
@@ -205,10 +203,82 @@ export class Mockups {
       name: 'Trip',
       idItinerary: [],
     });
-    await this.categoryService.create({
-      name: 'Trip',
+  }
+
+  async generateItinerary() {
+    const user = await this.usersService.findAll();
+    const category = await this.categoryService.findAll();
+
+    const dayOne = new Date();
+    const lastDay = new Date(dayOne);
+    lastDay.setDate(dayOne.getDate() + 2);
+
+    await this.itineraryService.create({
+      name: 'Découverte de Bordeaux',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 2,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Visite de musé',
+      numberDay: 2,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 0,
+      public: true,
+      approvate: TipsApprovate.Disapprovate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Promenade en villes',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 3,
+      public: true,
+      approvate: TipsApprovate.Pending,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Lieux insolites',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 1,
+      public: true,
+      approvate: TipsApprovate.Pending,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Lieux multiples',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 1,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
     });
   }
+
   async generateTips() {
     const user = await this.usersService.findAll();
     const bordeauxCity =
@@ -398,28 +468,6 @@ export class Mockups {
       comment:
         'Très bon café, ambiance agréable. ,Le personnel est sympathique et le service est rapide , Je recommande vivement ce café à tous ceux qui visitent la région.',
       date: new Date(),
-    });
-  }
-
-  async generateItinerary() {
-    const user = await this.usersService.findAll();
-    const category = await this.categoryService.findAll();
-
-    const dayOne = new Date();
-    const lastDay = new Date(dayOne);
-    lastDay.setDate(dayOne.getDate() + 2);
-
-    await this.itineraryService.create({
-      name: 'Découverte de Bordeaux',
-      numberDay: 3,
-      dayOne: dayOne,
-      lastDay: lastDay,
-      nbApprovate: 2,
-      public: true,
-      approvate: TipsApprovate.Approvate,
-      dayItinerary: [],
-      idCategory: category[Math.floor(Math.random() * category.length)].id,
-      idUser: user[Math.floor(Math.random() * user.length)].id,
     });
   }
 

@@ -22,12 +22,10 @@ export class DayItineraryController {
   async create(@Body() createDayItineraryDto: CreateDayItineraryDto) {
     return this.dayItineraryService.create(createDayItineraryDto);
   }
-  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return this.dayItineraryService.findAll();
   }
-  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.dayItineraryService.findOne(id);

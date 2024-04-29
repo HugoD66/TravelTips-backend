@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { Itinerary } from './entities/itinerary.entity';
 
 @Injectable()
@@ -16,7 +16,10 @@ export class ItineraryService {
   }
 
   async findAll() {
-    return this.itineraryRepository.find();
+    const options: FindManyOptions<Itinerary> = {
+      relations: ['idCategorie', 'idUser'],
+    };
+    return this.itineraryRepository.find(options);
   }
 
   async findOne(id: string) {

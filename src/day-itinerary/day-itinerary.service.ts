@@ -20,7 +20,13 @@ export class DayItineraryService {
 
   async findAll() {
     const dayItineraries = await this.dayItineraryRepository.find({
-      relations: ['idItinerary', 'idTips'],
+      relations: [
+        'idItinerary',
+        'idTips',
+        'idItinerary.idUser',
+        'idItinerary.idCategory',
+        'idTips.idCity',
+      ],
     });
     console.log(dayItineraries);
     return dayItineraries;

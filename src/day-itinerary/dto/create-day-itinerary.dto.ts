@@ -10,7 +10,7 @@ export class CreateDayItineraryDto {
   idItinerary!: string;
 
   @IsNotEmpty()
-  OrderInDay!: number;
+  slot!: string;
 
   @IsDateString()
   @IsNotEmpty()

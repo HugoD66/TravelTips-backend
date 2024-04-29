@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Repository } from "typeorm";
-import { Itinerary, ItineraryApprovate } from "./entities/itinerary.entity";
+import { FindManyOptions, Repository } from 'typeorm';
+import { Itinerary, ItineraryApprovate } from './entities/itinerary.entity';
 
 @Injectable()
 export class ItineraryService {
@@ -12,7 +12,8 @@ export class ItineraryService {
     private itineraryRepository: Repository<Itinerary>,
   ) {}
   async create(createItineraryDto: CreateItineraryDto): Promise<Itinerary> {
-    const itinerary: Itinerary = this.itineraryRepository.create(createItineraryDto);
+    const itinerary: Itinerary =
+      this.itineraryRepository.create(createItineraryDto);
     const itinerarySaved = this.itineraryRepository.save(itinerary);
     return itinerarySaved;
   }
@@ -36,27 +37,35 @@ export class ItineraryService {
   async approvateItinerary(id: string) {
     const options: FindManyOptions<Itinerary> = {
       where: { id: id },
+      relations: ['idUser', 'idCategory'],
     };
     const itinerary = await this.itineraryRepository.findOne(options);
-    if(!itinerary) {
+    if (!itinerary) {
       throw new Error('Itinerary not found');
     }
     itinerary.approvate = ItineraryApprovate.Approvate;
+
+    await this.itineraryRepository.save(itinerary);
+    return itinerary;
   }
   async disapprovateItinerary(id: string) {
     const options: FindManyOptions<Itinerary> = {
       where: { id: id },
     };
     const itinerary = await this.itineraryRepository.findOne(options);
-    if(!itinerary) {
+    if (!itinerary) {
       throw new Error('Itinerary not found');
     }
     itinerary.approvate = ItineraryApprovate.Disapprovate;
+
+    await this.itineraryRepository.save(itinerary);
+    return itinerary;
   }
 
   async getPendingItinerary() {
     const options: FindManyOptions<Itinerary> = {
       where: { approvate: ItineraryApprovate.Pending },
+      relations: ['idUser', 'idCategory'],
     };
     return this.itineraryRepository.find(options);
   }
@@ -64,6 +73,7 @@ export class ItineraryService {
   async getApprovateItinerary() {
     const options: FindManyOptions<Itinerary> = {
       where: { approvate: ItineraryApprovate.Approvate },
+      relations: ['idUser', 'idCategory'],
     };
     return this.itineraryRepository.find(options);
   }
@@ -71,6 +81,7 @@ export class ItineraryService {
   async getDisapprovateItinerary() {
     const options: FindManyOptions<Itinerary> = {
       where: { approvate: ItineraryApprovate.Disapprovate },
+      relations: ['idUser', 'idCategory'],
     };
     return this.itineraryRepository.find(options);
   }

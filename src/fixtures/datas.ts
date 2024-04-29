@@ -89,6 +89,7 @@ export class Mockups {
       password: 'Azeaze.11',
     });
   }
+
   async generateCountry() {
     await this.countryService.create({
       name: 'France',
@@ -198,7 +199,11 @@ export class Mockups {
 
     await this.categoryService.create({
       name: 'Tourisme',
-      idItinerary: itineraryList[Math.floor(Math.random() * itineraryList.length)][0].id,
+      idItinerary: [],
+    });
+    await this.categoryService.create({
+      name: 'Trip',
+      idItinerary: [],
     });
     await this.categoryService.create({
       name: 'Trip',

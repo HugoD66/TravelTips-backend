@@ -10,7 +10,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
-import { TipsApprovate } from "../../tips/entities/tip.entity";
+import { TipsApprovate } from '../../tips/entities/tip.entity';
 
 export enum ItineraryApprovate {
   Approvate = 'true',
@@ -44,7 +44,7 @@ export class Itinerary {
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })
-  idUser: User  | string;
+  idUser: User | string;
 
   @Column({ default: ItineraryApprovate.Pending })
   approvate: string;

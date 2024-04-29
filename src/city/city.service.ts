@@ -24,8 +24,15 @@ export class CityService {
       relations: ['tips'],
     });
   }
+
   async findAll() {
     return await this.cityRepository.find();
+  }
+
+  async fixtureCityGeneration(name: string) {
+    return await this.cityRepository.findOne({
+      where: { name },
+    });
   }
 
   async findOne(id: string) {

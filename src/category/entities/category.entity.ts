@@ -10,5 +10,5 @@ export class Category {
   name: string;
 
   @OneToMany(() => Itinerary, (itinerary) => itinerary.id)
-  itinerary!: Itinerary[];
+  idItinerary!: Itinerary[] | string[];
 }

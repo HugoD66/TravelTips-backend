@@ -31,11 +31,11 @@ export class Mockups {
     await this.generateCountry();
     await this.generateCity();
     await this.generateCategory();
+    await this.generateItinerary();
     await this.generateTips();
     await this.generatePictures();
     await this.generateRate();
     await this.generateComment();
-    await this.generateItinerary();
     await this.generateInineraryDay();
   }
 
@@ -68,14 +68,34 @@ export class Mockups {
       firstName: 'Hugo',
       lastName: 'Dessauw',
       birthday: '1992-09-22',
-      mail: 'aze@aze.com',
+      mail: 'dessauw.hugo@example.com',
+      role: UserRole.User,
+      password: 'Azeaze.11',
+    });
+    await this.usersService.create({
+      firstName: 'Melina',
+      lastName: 'Mitterrand',
+      birthday: '1992-09-22',
+      mail: 'melina.mitterrand@example.com',
+      role: UserRole.User,
+      password: 'Azeaze.11',
+    });
+    await this.usersService.create({
+      firstName: 'Hugon',
+      lastName: 'Maurane',
+      birthday: '1992-09-22',
+      mail: 'maurane.hugon@example.com',
       role: UserRole.User,
       password: 'Azeaze.11',
     });
   }
+
   async generateCountry() {
     await this.countryService.create({
       name: 'France',
+    });
+    await this.countryService.create({
+      name: 'Canada',
     });
   }
 
@@ -102,87 +122,86 @@ export class Mockups {
       createdBy: user[Math.floor(Math.random() * user.length)].id,
       idTips: tip[Math.floor(Math.random() * tip.length)],
     });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-5.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-6.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-7.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-8.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-9.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-10.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-11.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-12.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
+    await this.pictureService.create({
+      url: 'uploads\\fixtures\\fixture-13.jpg',
+      createdBy: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tip[Math.floor(Math.random() * tip.length)],
+    });
   }
 
   async generateCity() {
-    const countryList = await this.countryService.findAll();
+    const french = await this.countryService.findOneByName('France');
+    const canada = await this.countryService.findOneByName('Canada');
     await this.cityService.create({
       name: 'Bordeaux',
       zipCode: '33000',
-      idCountry: countryList[Math.floor(Math.random() * countryList.length)].id,
+      idCountry: french.id,
+    });
+    await this.cityService.create({
+      name: 'Tours',
+      zipCode: '37000',
+      idCountry: french.id,
+    });
+    await this.cityService.create({
+      name: 'Toronto',
+      zipCode: 'M1L - M9N',
+      idCountry: canada.id,
+    });
+    await this.cityService.create({
+      name: 'Ottawa',
+      zipCode: 'H0A - K4C',
+      idCountry: canada.id,
     });
   }
 
   async generateCategory() {
     await this.categoryService.create({
       name: 'Tourisme',
+      idItinerary: [],
     });
-  }
-  async generateTips() {
-    const cityList = await this.cityService.findAll();
-    const user = await this.usersService.findAll();
-
-    await this.tipsService.create({
-      name: 'Café de la Gare',
-      address: 'Place de la Comédie',
-      price: 3,
-      approvate: TipsApprovate.Pending,
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-      idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
-      lat: '44.837789',
-      lng: '-0.57918',
-      nbApprovate: 3,
-      createdAt: new Date(),
-    });
-
-    await this.tipsService.create({
-      name: 'Lieux agréable',
-      address: 'Place de la Bourse',
-      price: 1,
-      approvate: TipsApprovate.Approvate,
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-      idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
-      lat: '44.827789',
-      lng: '-0.50918',
-      nbApprovate: 1,
-      createdAt: new Date(),
-    });
-
-    await this.tipsService.create({
-      name: 'Nature découverte',
-      address: 'Place de la nature',
-      price: 1,
-      approvate: TipsApprovate.Approvate,
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-      idCity: cityList[Math.floor(Math.random() * cityList.length)].id,
-      lat: '44.821189',
-      lng: '-0.5618',
-      nbApprovate: 2,
-      createdAt: new Date(),
-    });
-  }
-
-  async generateRate() {
-    const user = await this.usersService.findAll();
-    const tips = await this.tipsService.findAll();
-
-    await this.rateService.create({
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-      note: 4,
-    });
-  }
-
-  async generateComment() {
-    const user = await this.usersService.findAll();
-    const tips = await this.tipsService.findAll();
-
-    await this.commentService.create({
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-      comment:
-        'Très bon café, ambiance agréable. ,Le personnel est sympathique et le service est rapide , Je recommande vivement ce café à tous ceux qui visitent la région.',
-      date: new Date(),
+    await this.categoryService.create({
+      name: 'Trip',
+      idItinerary: [],
     });
   }
 
@@ -199,8 +218,256 @@ export class Mockups {
       numberDay: 3,
       dayOne: dayOne,
       lastDay: lastDay,
+      nbApprovate: 2,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Visite de musé',
+      numberDay: 2,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 0,
+      public: true,
+      approvate: TipsApprovate.Disapprovate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Promenade en villes',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 3,
+      public: true,
+      approvate: TipsApprovate.Pending,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Lieux insolites',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 1,
+      public: true,
+      approvate: TipsApprovate.Pending,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Lieux multiples',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 1,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+  }
+
+  async generateTips() {
+    const user = await this.usersService.findAll();
+    const bordeauxCity =
+      await this.cityService.fixtureCityGeneration('Bordeaux');
+    const toursCity = await this.cityService.fixtureCityGeneration('Tours');
+    const torontoCity = await this.cityService.fixtureCityGeneration('Toronto');
+    const ottawaCity = await this.cityService.fixtureCityGeneration('Ottawa');
+
+    //Bordeaux
+    await this.tipsService.create({
+      name: 'Café de la Gare',
+      address: 'Place de la Comédie',
+      price: 44,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: bordeauxCity.id,
+      lat: '44.814439',
+      lng: '-0.643281',
+      nbApprovate: 3,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Lieux agréable',
+      address: 'Place de la Bourse',
+      price: 70,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: bordeauxCity.id,
+      lat: '44.783012',
+      lng: '-0.555906',
+      nbApprovate: 1,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Nature découverte',
+      address: 'Place de la nature',
+      price: 17,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: bordeauxCity.id,
+      lat: '44.848891',
+      lng: '-0.507497',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+
+    //Tours
+    await this.tipsService.create({
+      name: 'Nature découverte',
+      address: 'Place de la nature',
+      price: 51,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: toursCity.id,
+      lat: '44.848891',
+      lng: '-0.507497',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Nature découverte',
+      address: 'Place de la nature',
+      price: 16,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: toursCity.id,
+      lat: '44.848891',
+      lng: '-0.507497',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Jolie coin',
+      address: 'Rue du coin',
+      price: 90,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: toursCity.id,
+      lat: '44.848891',
+      lng: '-0.507497',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+
+    //Toronto
+    await this.tipsService.create({
+      name: "Zone d'activité",
+      address: 'Place de la nature',
+      price: 64,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: torontoCity.id,
+      lat: '43.766914',
+      lng: '-79.286161',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Belle nature',
+      address: '126 Rue de la nature',
+      price: 55,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: torontoCity.id,
+      lat: '43.829926',
+      lng: '-79.180122',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Café sympa',
+      address: 'Place du café',
+      price: 41,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: torontoCity.id,
+      lat: '43.733685',
+      lng: '-79.597060',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+
+    //Toronto
+    await this.tipsService.create({
+      name: "Coin d'activité",
+      address: "Place de l'activité",
+      price: 44,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: ottawaCity.id,
+      lat: '45.407056',
+      lng: '-75.391058',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Joli coin',
+      address: '126 Rue Joli coin',
+      price: 12,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: ottawaCity.id,
+      lat: '45.396449',
+      lng: '-75.690436',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+    await this.tipsService.create({
+      name: 'Café sympa',
+      address: '18 Place du café',
+      price: 41,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: ottawaCity.id,
+      lat: '45.378124',
+      lng: '-75.819525',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+  }
+
+  async generateRate() {
+    const users = await this.usersService.findAll();
+    const tips = await this.tipsService.findAll();
+
+    const limitedTips = tips.slice(0, 12);
+    for (const tip of limitedTips) {
+      for (let i = 0; i < 4; i++) {
+        const user = users[Math.floor(Math.random() * users.length)];
+        const note = Math.floor(Math.random() * 99) + 1;
+        await this.rateService.create({
+          idUser: user.id,
+          idTips: tip.id,
+          note: note,
+        });
+      }
+    }
+  }
+
+  async generateComment() {
+    const user = await this.usersService.findAll();
+    const tips = await this.tipsService.findAll();
+
+    await this.commentService.create({
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idTips: tips[Math.floor(Math.random() * tips.length)].id,
+      comment:
+        'Très bon café, ambiance agréable. ,Le personnel est sympathique et le service est rapide , Je recommande vivement ce café à tous ceux qui visitent la région.',
+      date: new Date(),
     });
   }
 

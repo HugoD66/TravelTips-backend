@@ -26,6 +26,23 @@ export class ItineraryController {
   async findAll() {
     return this.itineraryService.findAll();
   }
+
+  @UseGuards(AuthGuard)
+  @Get('/pendingItinerary')
+  async getPendingItinerary() {
+    return this.itineraryService.getPendingItinerary();
+  }
+  @UseGuards(AuthGuard)
+  @Get('/approvateItinerary')
+  async getApprovateItinerary() {
+    return this.itineraryService.getApprovateItinerary();
+  }
+  @UseGuards(AuthGuard)
+  @Get('/disapproveItinerary')
+  async getDisapproveItinerarysUser() {
+    return this.itineraryService.getDisapprovateItinerary();
+  }
+
   @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
@@ -43,5 +60,16 @@ export class ItineraryController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.itineraryService.remove(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('approvate/:id')
+  async updateApprovate(@Param('id') id: string) {
+    return this.itineraryService.approvateItinerary(id);
+  }
+  @UseGuards(AuthGuard)
+  @Patch('disapprove/:id')
+  async disapproveItinerary(@Param('id') id: string) {
+    return this.itineraryService.disapprovateItinerary(id);
   }
 }

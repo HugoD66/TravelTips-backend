@@ -412,7 +412,7 @@ export class Mockups {
       nbApprovate: 2,
       public: true,
       approvate: TipsApprovate.Approvate,
-      dayItinerary: ['1'],
+      dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
     });

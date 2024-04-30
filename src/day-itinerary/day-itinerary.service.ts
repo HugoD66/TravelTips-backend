@@ -28,7 +28,6 @@ export class DayItineraryService {
         'idTips.idCity',
       ],
     });
-    console.log(dayItineraries);
     return dayItineraries;
   }
 

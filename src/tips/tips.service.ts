@@ -100,7 +100,6 @@ export class TipsService {
       where: { idCity: { idCountry: { name: name } } },
       relations: ['idCity', 'idCity.idCountry', 'idUser'],
     });
-    console.log('les tips de ' + name + 'sont ' + tips);
     return tips;
   }
 

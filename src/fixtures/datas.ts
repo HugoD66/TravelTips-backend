@@ -473,31 +473,37 @@ export class Mockups {
     });
   }
 
-  async generateItinerary() {
-    const user = await this.usersService.findAll();
-    const category = await this.categoryService.findAll();
-
-    const dayOne = new Date();
-    const lastDay = new Date(dayOne);
-    lastDay.setDate(dayOne.getDate() + 2);
-
-    await this.itineraryService.create({
-      name: 'Découverte de Bordeaux',
-      numberDay: 3,
-      dayOne: dayOne,
-      lastDay: lastDay,
-      idCategory: category[Math.floor(Math.random() * category.length)].id,
-      idUser: user[Math.floor(Math.random() * user.length)].id,
-    });
-  }
-
   async generateInineraryDay() {
     const itinerary = await this.itineraryService.findAll();
     const tips = await this.tipsService.findAll();
 
     await this.dayItineraryService.create({
       idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      slot: '10h - 11h',
+      slot: '13h - 18h',
+      date: new Date(),
+      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      idTips: tips[Math.floor(Math.random() * tips.length)].id,
+    });
+
+    await this.dayItineraryService.create({
+      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      slot: '8h - 10h',
+      date: new Date(),
+      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      idTips: tips[Math.floor(Math.random() * tips.length)].id,
+    });
+
+    await this.dayItineraryService.create({
+      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      slot: '18h - 21h',
+      date: new Date(),
+      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      idTips: tips[Math.floor(Math.random() * tips.length)].id,
+    });
+
+    await this.dayItineraryService.create({
+      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+      slot: '11h - 13h',
       date: new Date(),
       idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
       idTips: tips[Math.floor(Math.random() * tips.length)].id,

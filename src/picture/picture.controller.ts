@@ -29,7 +29,6 @@ export class PictureController {
     @Param('tipsId') tipsId: string,
     @UploadedFile(new FileSizeValidationPipe()) file: Express.Multer.File,
   ) {
-    console.log(file);
     if (!file) {
       throw new BadRequestException('No file uploaded');
     }
@@ -39,7 +38,6 @@ export class PictureController {
       createdBy: userId,
       idTips: tip,
     };
-    console.log(createPictureDto);
 
     return await this.pictureService.create(createPictureDto);
   }
@@ -48,7 +46,6 @@ export class PictureController {
   async getPictures(@Param('tipsId') tipsId: string) {
     const tipsList =  await this.pictureService.findByTips(tipsId);
 
-    console.log(tipsList);
     return tipsList;
   }
   @Post()

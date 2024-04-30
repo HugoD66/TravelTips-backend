@@ -280,7 +280,6 @@ export class Mockups {
   }
 
   async generateTips() {
-    const cityList = await this.cityService.findAll();
     const user = await this.usersService.findAll();
     const bordeauxCity =
       await this.cityService.fixtureCityGeneration('Bordeaux');

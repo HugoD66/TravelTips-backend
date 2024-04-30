@@ -21,7 +21,6 @@ export class CategoryController {
   async create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
-  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return this.categoryService.findAll();

@@ -26,6 +26,11 @@ export class DayItineraryController {
   async findAll() {
     return this.dayItineraryService.findAll();
   }
+  @Get('/by-itinerary/:id')
+  async findAllByItineraryId(@Param('id') idItinerary: string) {
+    console.log(idItinerary)
+    return this.dayItineraryService.findAllByItineraryId(idItinerary);
+  }
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.dayItineraryService.findOne(id);

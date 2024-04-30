@@ -31,6 +31,21 @@ export class DayItineraryService {
     return dayItineraries;
   }
 
+  async findAllByItineraryId(idItinerary: string) {
+    console.log(idItinerary)
+    const dayItineraries = await this.dayItineraryRepository.find(
+      {
+        where: { idItinerary: { id: idItinerary } },
+        relations: [
+          'idTips',
+          'idTips.idCity',
+        ],
+      }
+    );
+    return dayItineraries;
+  }//      where: { idCity: { idCountry: { name: name } } },
+
+
   async findOne(id: string) {
     return this.dayItineraryRepository.findOne({ where: { id } });
   }

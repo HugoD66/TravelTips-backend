@@ -42,7 +42,6 @@ export class ItineraryController {
     return this.itineraryService.getDisapprovateItinerary();
   }
 
-  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.itineraryService.findOne(id);

@@ -10,7 +10,6 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
-import { TipsApprovate } from '../../tips/entities/tip.entity';
 
 export enum ItineraryApprovate {
   Approvate = 'true',

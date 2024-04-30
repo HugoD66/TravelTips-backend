@@ -21,7 +21,6 @@ export class ItineraryController {
   async create(@Body() createItineraryDto: CreateItineraryDto) {
     return this.itineraryService.create(createItineraryDto);
   }
-  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return this.itineraryService.findAll();

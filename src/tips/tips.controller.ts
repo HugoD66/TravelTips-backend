@@ -23,19 +23,16 @@ export class TipsController {
     return this.tipsService.create(createTipDto);
   }
 
-  @UseGuards(AuthGuard)
   @Get('latest')
   getLatestTips() {
     return this.tipsService.getLatestTips();
   }
 
-  @UseGuards(AuthGuard)
   @Get('by-city/:cityName')
   getTipsByCityName(@Param('cityName') cityName: string) {
     return this.tipsService.getTipsByCityName(cityName);
   }
 
-  @UseGuards(AuthGuard)
   @Get('by-name/:name')
   getTipsByName(@Param('name') name: string) {
     return this.tipsService.getTipsByName(name);
@@ -72,12 +69,10 @@ export class TipsController {
   async getPendingTipsUser(@Param('id') id: string) {
     return this.tipsService.getTipsUser(id);
   }
-  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return this.tipsService.findAll();
   }
-  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.tipsService.findOne(id);
@@ -92,9 +87,12 @@ export class TipsController {
   async remove(@Param('id') id: string) {
     return this.tipsService.remove(id);
   }
-  @UseGuards(AuthGuard)
   @Get('by-country/:name')
   async getTipsByCountry(@Param('name') name: string) {
     return this.tipsService.getTipsByCountry(name);
+  }
+  @Get('by-day-itineraries/:id')
+  async getTipsByDayItinerary(@Param('id') id: string) {
+    return this.tipsService.getTipsByCountry(id);
   }
 }

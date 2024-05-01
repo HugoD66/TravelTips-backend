@@ -33,7 +33,10 @@ export class TipsService {
   }
 
   async findAll() {
-    return this.tipRepository.find();
+    return this.tipRepository.find(
+      {      relations: ['idCity', 'idCity.idCountry'],
+      }
+    );
   }
   async getTipsByName(name: string) {
     return this.tipRepository.findOne({ where: { name: name } });

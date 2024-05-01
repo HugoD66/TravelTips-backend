@@ -32,19 +32,13 @@ export class DayItineraryService {
   }
 
   async findAllByItineraryId(idItinerary: string) {
-    console.log(idItinerary)
-    const dayItineraries = await this.dayItineraryRepository.find(
-      {
-        where: { idItinerary: { id: idItinerary } },
-        relations: [
-          'idTips',
-          'idTips.idCity',
-        ],
-      }
-    );
+    console.log(idItinerary);
+    const dayItineraries = await this.dayItineraryRepository.find({
+      where: { idItinerary: { id: idItinerary } },
+      relations: ['idTips', 'idTips.idCity', 'idTips.pictures'],
+    });
     return dayItineraries;
-  }//      where: { idCity: { idCountry: { name: name } } },
-
+  }
 
   async findOne(id: string) {
     return this.dayItineraryRepository.findOne({ where: { id } });

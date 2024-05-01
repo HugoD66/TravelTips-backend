@@ -97,6 +97,12 @@ export class Mockups {
     await this.countryService.create({
       name: 'Canada',
     });
+    await this.countryService.create({
+      name: 'Iceland',
+    });
+    await this.countryService.create({
+      name: 'Italy',
+    });
   }
 
   async generatePictures() {
@@ -172,6 +178,8 @@ export class Mockups {
   async generateCity() {
     const french = await this.countryService.findOneByName('France');
     const canada = await this.countryService.findOneByName('Canada');
+    const iceland = await this.countryService.findOneByName('Iceland');
+    const italy = await this.countryService.findOneByName('Italy');
     await this.cityService.create({
       name: 'Bordeaux',
       zipCode: '33000',
@@ -192,6 +200,16 @@ export class Mockups {
       zipCode: 'H0A - K4C',
       idCountry: canada.id,
     });
+    await this.cityService.create({
+      name: 'Reykjavik',
+      zipCode: '16464',
+      idCountry: iceland.id,
+    });
+    await this.cityService.create({
+      name: 'Rome',
+      zipCode: '00042',
+      idCountry: italy.id,
+    });
   }
 
   async generateCategory() {
@@ -201,6 +219,22 @@ export class Mockups {
     });
     await this.categoryService.create({
       name: 'Trip',
+      idItinerary: [],
+    });
+    await this.categoryService.create({
+      name: 'Découverte',
+      idItinerary: [],
+    });
+    await this.categoryService.create({
+      name: 'Soirées',
+      idItinerary: [],
+    });
+    await this.categoryService.create({
+      name: 'Culture locale',
+      idItinerary: [],
+    });
+    await this.categoryService.create({
+      name: 'Aventure',
       idItinerary: [],
     });
   }
@@ -277,6 +311,58 @@ export class Mockups {
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
     });
+
+    await this.itineraryService.create({
+      name: 'Route des vins',
+      numberDay: 2,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 2,
+      public: true,
+      approvate: TipsApprovate.Pending,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Escapade nature',
+      numberDay: 4,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 2,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Gastronomie régionale',
+      numberDay: 1,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 0,
+      public: true,
+      approvate: TipsApprovate.Disapprovate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
+
+    await this.itineraryService.create({
+      name: 'Festival et événements',
+      numberDay: 3,
+      dayOne: dayOne,
+      lastDay: lastDay,
+      nbApprovate: 4,
+      public: true,
+      approvate: TipsApprovate.Approvate,
+      dayItinerary: [],
+      idCategory: category[Math.floor(Math.random() * category.length)].id,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+    });
   }
 
   async generateTips() {
@@ -285,7 +371,91 @@ export class Mockups {
       await this.cityService.fixtureCityGeneration('Bordeaux');
     const toursCity = await this.cityService.fixtureCityGeneration('Tours');
     const torontoCity = await this.cityService.fixtureCityGeneration('Toronto');
+    const reykjavikCity =
+      await this.cityService.fixtureCityGeneration('Reykjavik');
+    const romeCity = await this.cityService.fixtureCityGeneration('Rome');
     const ottawaCity = await this.cityService.fixtureCityGeneration('Ottawa');
+
+    //Rome
+    await this.tipsService.create({
+      name: 'Trattoria Romana',
+      address: 'Trastevere',
+      price: 30,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: romeCity.id,
+      lat: '41.887856',
+      lng: '12.469498',
+      nbApprovate: 3,
+      createdAt: new Date(),
+    });
+
+    await this.tipsService.create({
+      name: 'Gelateria del Corso',
+      address: 'Via del Corso',
+      price: 5,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: romeCity.id,
+      lat: '41.902783',
+      lng: '12.496366',
+      nbApprovate: 2,
+      createdAt: new Date(),
+    });
+
+    await this.tipsService.create({
+      name: 'Trattoria Romana',
+      address: 'Trastevere',
+      price: 30,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: romeCity.id,
+      lat: '41.887856',
+      lng: '12.469498',
+      nbApprovate: 3,
+      createdAt: new Date(),
+    });
+
+    // Reykjavik
+
+    await this.tipsService.create({
+      name: 'Bains géothermiques de Reykjavik',
+      address: 'Laugavegur',
+      price: 30,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: reykjavikCity.id,
+      lat: '64.146582',
+      lng: '-21.942635',
+      nbApprovate: 3,
+      createdAt: new Date(),
+    });
+
+    await this.tipsService.create({
+      name: "Musée national d'Islande",
+      address: 'Suðurgata',
+      price: 12,
+      approvate: TipsApprovate.Pending,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: reykjavikCity.id,
+      lat: '64.141718',
+      lng: '-21.949422',
+      nbApprovate: 1,
+      createdAt: new Date(),
+    });
+
+    await this.tipsService.create({
+      name: 'Promenade de la sculpture et de la rive',
+      address: 'Sæbraut',
+      price: 0,
+      approvate: TipsApprovate.Approvate,
+      idUser: user[Math.floor(Math.random() * user.length)].id,
+      idCity: reykjavikCity.id,
+      lat: '64.149780',
+      lng: '-21.938399',
+      nbApprovate: 1,
+      createdAt: new Date(),
+    });
 
     //Bordeaux
     await this.tipsService.create({
@@ -402,7 +572,7 @@ export class Mockups {
       createdAt: new Date(),
     });
 
-    //Toronto
+    //Ottawa
     await this.tipsService.create({
       name: "Coin d'activité",
       address: "Place de l'activité",
@@ -475,37 +645,27 @@ export class Mockups {
   async generateInineraryDay() {
     const itinerary = await this.itineraryService.findAll();
     const tips = await this.tipsService.findAll();
+    const timeSlots = [
+      '8h - 10h',
+      '10h - 12h',
+      '12h - 14h',
+      '14h - 16h',
+      '16h - 18h',
+      '18h - 20h',
+      '20h - 22h',
+      '9h - 11h',
+      '11h - 13h',
+      '13h - 15h',
+    ];
 
-    await this.dayItineraryService.create({
-      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      slot: '13h - 18h',
-      date: new Date(),
-      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-    });
-
-    await this.dayItineraryService.create({
-      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      slot: '8h - 10h',
-      date: new Date(),
-      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-    });
-
-    await this.dayItineraryService.create({
-      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      slot: '18h - 21h',
-      date: new Date(),
-      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-    });
-
-    await this.dayItineraryService.create({
-      idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      slot: '11h - 13h',
-      date: new Date(),
-      idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
-      idTips: tips[Math.floor(Math.random() * tips.length)].id,
-    });
+    for (let i = 0; i < 10; i++) {
+      await this.dayItineraryService.create({
+        idDay: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+        slot: timeSlots[i], // Assigns a unique time slot from the array for each iteration
+        date: new Date(),
+        idItinerary: itinerary[Math.floor(Math.random() * itinerary.length)].id,
+        idTips: tips[Math.floor(Math.random() * tips.length)].id,
+      });
+    }
   }
 }

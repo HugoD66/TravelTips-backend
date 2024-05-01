@@ -66,9 +66,10 @@ export class TipsController {
 
   @UseGuards(AuthGuard)
   @Get('users/:id')
-  async getPendingTipsUser(@Param('id') id: string) {
+  async getTipsUser(@Param('id') id: string) {
     return this.tipsService.getTipsUser(id);
   }
+
   @Get()
   async findAll() {
     return this.tipsService.findAll();

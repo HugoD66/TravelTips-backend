@@ -25,7 +25,10 @@ export class ItineraryService {
   }
 
   async findOne(id: string) {
-    return this.itineraryRepository.findOne({ where: { id }, relations: ['idUser', 'idCategory']});
+    return this.itineraryRepository.findOne({
+      where: { id },
+      relations: ['idUser', 'idCategory'],
+    });
   }
 
   async update(id: string, updateItineraryDto: UpdateItineraryDto) {
@@ -34,6 +37,12 @@ export class ItineraryService {
 
   async remove(id: string) {
     return this.itineraryRepository.delete(id);
+  }
+  async getItineraryByUser(idUser: string) {
+    return this.itineraryRepository.find({
+      where: { idUser: { id: idUser } },
+      relations: ['idUser', 'idCategory'],
+    });
   }
 
   async approvateItinerary(id: string) {

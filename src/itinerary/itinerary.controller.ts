@@ -54,6 +54,7 @@ export class ItineraryController {
   ) {
     return this.itineraryService.update(id, updateItineraryDto);
   }
+
   @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
@@ -69,5 +70,11 @@ export class ItineraryController {
   @Patch('disapprove/:id')
   async disapproveItinerary(@Param('id') id: string) {
     return this.itineraryService.disapprovateItinerary(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('users/:userId')
+  async getItineraryByUser(@Param('userId') userId: string) {
+    return this.itineraryService.getItineraryByUser(userId);
   }
 }

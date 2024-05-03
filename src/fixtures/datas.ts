@@ -12,6 +12,14 @@ import { DayItineraryService } from '../day-itinerary/day-itinerary.service';
 import { TipsApprovate } from 'src/tips/entities/tip.entity';
 import { PictureService } from '../picture/picture.service';
 
+function getRandomDateWithinLastMonth() {
+  const today = new Date();
+  const oneMonthAgo = new Date().setDate(today.getDate() - 30);
+  const randomTimestamp =
+    Math.random() * (today.getTime() - oneMonthAgo) + oneMonthAgo;
+  return new Date(randomTimestamp);
+}
+
 @Injectable()
 export class Mockups {
   constructor(
@@ -258,6 +266,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -271,6 +280,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -284,6 +294,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -297,6 +308,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -310,6 +322,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -323,6 +336,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -336,6 +350,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -349,6 +364,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.itineraryService.create({
@@ -362,6 +378,7 @@ export class Mockups {
       dayItinerary: [],
       idCategory: category[Math.floor(Math.random() * category.length)].id,
       idUser: user[Math.floor(Math.random() * user.length)].id,
+      createdAt: getRandomDateWithinLastMonth(),
     });
   }
 
@@ -387,7 +404,7 @@ export class Mockups {
       lat: '41.887856',
       lng: '12.469498',
       nbApprovate: 3,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.tipsService.create({
@@ -400,7 +417,7 @@ export class Mockups {
       lat: '41.902783',
       lng: '12.496366',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.tipsService.create({
@@ -413,7 +430,7 @@ export class Mockups {
       lat: '41.887856',
       lng: '12.469498',
       nbApprovate: 3,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     // Reykjavik
@@ -428,7 +445,7 @@ export class Mockups {
       lat: '64.146582',
       lng: '-21.942635',
       nbApprovate: 3,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.tipsService.create({
@@ -441,7 +458,7 @@ export class Mockups {
       lat: '64.141718',
       lng: '-21.949422',
       nbApprovate: 1,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.tipsService.create({
@@ -454,7 +471,7 @@ export class Mockups {
       lat: '64.149780',
       lng: '-21.938399',
       nbApprovate: 1,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     //Bordeaux
@@ -468,7 +485,7 @@ export class Mockups {
       lat: '44.814439',
       lng: '-0.643281',
       nbApprovate: 3,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     await this.tipsService.create({
@@ -481,7 +498,7 @@ export class Mockups {
       lat: '44.783012',
       lng: '-0.555906',
       nbApprovate: 1,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Nature découverte',
@@ -493,7 +510,7 @@ export class Mockups {
       lat: '44.848891',
       lng: '-0.507497',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     //Tours
@@ -507,7 +524,7 @@ export class Mockups {
       lat: '44.848891',
       lng: '-0.507497',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Nature découverte',
@@ -519,7 +536,7 @@ export class Mockups {
       lat: '44.848891',
       lng: '-0.507497',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Jolie coin',
@@ -531,7 +548,7 @@ export class Mockups {
       lat: '44.848891',
       lng: '-0.507497',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     //Toronto
@@ -545,7 +562,7 @@ export class Mockups {
       lat: '43.766914',
       lng: '-79.286161',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Belle nature',
@@ -557,7 +574,7 @@ export class Mockups {
       lat: '43.829926',
       lng: '-79.180122',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Café sympa',
@@ -569,7 +586,7 @@ export class Mockups {
       lat: '43.733685',
       lng: '-79.597060',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
 
     //Ottawa
@@ -583,7 +600,7 @@ export class Mockups {
       lat: '45.407056',
       lng: '-75.391058',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Joli coin',
@@ -595,7 +612,7 @@ export class Mockups {
       lat: '45.396449',
       lng: '-75.690436',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
     await this.tipsService.create({
       name: 'Café sympa',
@@ -607,7 +624,7 @@ export class Mockups {
       lat: '45.378124',
       lng: '-75.819525',
       nbApprovate: 2,
-      createdAt: new Date(),
+      createdAt: getRandomDateWithinLastMonth(),
     });
   }
 

@@ -21,6 +21,12 @@ export class ItineraryController {
   async create(@Body() createItineraryDto: CreateItineraryDto) {
     return this.itineraryService.create(createItineraryDto);
   }
+
+  @Get('latest')
+  getLatestItinerary() {
+    return this.itineraryService.getLatestItinerary();
+  }
+
   @Get()
   async findAll() {
     return this.itineraryService.findAll();

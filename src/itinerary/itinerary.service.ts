@@ -4,6 +4,7 @@ import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Repository } from 'typeorm';
 import { Itinerary, ItineraryApprovate } from './entities/itinerary.entity';
+import { Tip } from '../tips/entities/tip.entity';
 
 @Injectable()
 export class ItineraryService {
@@ -35,6 +36,15 @@ export class ItineraryService {
     return this.itineraryRepository.update(id, updateItineraryDto);
   }
 
+  async getLatestItinerary(): Promise<Itinerary[]> {
+    return await this.itineraryRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+      take: 6,
+      relations: ['idUser', 'idCategory'],
+    });
+  }
   async remove(id: string) {
     return this.itineraryRepository.delete(id);
   }

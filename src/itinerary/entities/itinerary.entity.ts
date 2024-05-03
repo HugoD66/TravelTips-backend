@@ -9,6 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  CreateDateColumn,
 } from 'typeorm';
 
 export enum ItineraryApprovate {
@@ -40,6 +41,9 @@ export class Itinerary {
   @ManyToOne(() => Category, (category) => category.id)
   @JoinColumn({ name: 'idCategory' })
   idCategory: Category | string;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'idUser' })

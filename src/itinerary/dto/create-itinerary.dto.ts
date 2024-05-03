@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateItineraryDto {
   @IsNotEmpty()
@@ -15,4 +15,5 @@ export class CreateItineraryDto {
   idUser: string;
   approvate: string;
   dayItinerary: string[];
+  createdAt: Date;
 }

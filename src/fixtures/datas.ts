@@ -36,27 +36,36 @@ export class Mockups {
   ) {}
   async seedAll() {
     await this.generateUser();
-    await this.generateCountry();
-    await this.generateCity();
+    //await this.generateCountry();
+    //await this.generateCity();
     await this.generateCategory();
-    await this.generateItinerary();
-    await this.generateTips();
-    await this.generatePictures();
-    await this.generateRate();
-    await this.generateComment();
-    await this.generateInineraryDay();
+    //await this.generateItinerary();
+    //await this.generateTips();
+    //await this.generatePictures();
+    //await this.generateRate();
+    //await this.generateComment();
+    //await this.generateInineraryDay();
   }
 
   async generateUser() {
     await this.usersService.create({
-      firstName: 'JeanAdmin',
-      lastName: 'DupontAdmin',
+      firstName: 'Jean',
+      lastName: 'Dupont',
       birthday: '1990-05-15',
-      mail: 'jeandupontadmin@example.com',
+      mail: 'admin@gmail.com',
       role: UserRole.Admin,
       password: 'Azeaze.11',
     });
+
     await this.usersService.create({
+      firstName: 'Hugo',
+      lastName: 'Dessauw',
+      birthday: '1992-09-22',
+      mail: 'dessauw.hugo@gmail.com',
+      role: UserRole.User,
+      password: 'Azeaze.11',
+    });
+    /* await this.usersService.create({
       firstName: 'JeanUser',
       lastName: 'DupontUser',
       birthday: '1990-05-15',
@@ -96,6 +105,8 @@ export class Mockups {
       role: UserRole.User,
       password: 'Azeaze.11',
     });
+
+   */
   }
 
   async generateCountry() {

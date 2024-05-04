@@ -32,7 +32,6 @@ export class DayItineraryService {
   }
 
   async findAllByItineraryId(idItinerary: string) {
-    console.log(idItinerary);
     const dayItineraries = await this.dayItineraryRepository.find({
       where: { idItinerary: { id: idItinerary } },
       relations: ['idTips', 'idTips.idCity', 'idTips.pictures'],

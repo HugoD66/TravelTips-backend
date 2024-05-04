@@ -41,7 +41,7 @@ export class ItineraryService {
       order: {
         createdAt: 'DESC',
       },
-      take: 6,
+      take: 4,
       relations: ['idUser', 'idCategory'],
     });
   }

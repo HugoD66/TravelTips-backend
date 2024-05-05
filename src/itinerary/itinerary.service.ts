@@ -33,7 +33,14 @@ export class ItineraryService {
   }
 
   async update(id: string, updateItineraryDto: UpdateItineraryDto) {
-    return this.itineraryRepository.update(id, updateItineraryDto);
+    const itinerary = await this.itineraryRepository.findOne({ where: { id } });
+    const updatedItinerary = this.itineraryRepository.merge(
+      itinerary,
+      updateItineraryDto,
+    );
+    itinerary.approvate = ItineraryApprovate.Pending;
+    await this.itineraryRepository.save(updatedItinerary);
+    return updatedItinerary;
   }
 
   async getLatestItinerary(): Promise<Itinerary[]> {

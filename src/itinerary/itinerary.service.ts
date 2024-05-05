@@ -42,12 +42,15 @@ export class ItineraryService {
         createdAt: 'DESC',
       },
       take: 4,
+      where: { approvate: ItineraryApprovate.Approvate },
       relations: ['idUser', 'idCategory'],
     });
   }
+
   async remove(id: string) {
     return this.itineraryRepository.delete(id);
   }
+
   async getItineraryByUser(idUser: string) {
     return this.itineraryRepository.find({
       where: { idUser: { id: idUser } },

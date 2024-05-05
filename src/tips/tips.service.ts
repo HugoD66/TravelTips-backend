@@ -18,16 +18,12 @@ export class TipsService {
   ) {}
 
   async create(createTipDto: CreateTipDto) {
-    /*
-      const dayItinerary = this.dayItineraryRepository.create(
-      createDayItineraryDto,
-    );
-     */
     const tip = this.tipRepository.create(createTipDto);
     tip.idUser = await this.userService.findOne(createTipDto.idUser);
     if (!createTipDto.idCity) {
       tip.idCity = await this.cityService.findOne(createTipDto.idCity);
     }
+    tip.approvate = TipsApprovate.Pending;
 
     return this.tipRepository.save(tip);
   }
@@ -38,9 +34,11 @@ export class TipsService {
       }
     );
   }
+
   async getTipsByName(name: string) {
     return this.tipRepository.findOne({ where: { name: name } });
   }
+
   async findOne(id: string) {
     return this.tipRepository.findOne({ where: { id } });
   }
@@ -60,7 +58,6 @@ export class TipsService {
       relations: ['idCity', 'idCity.idCountry'],
     };
     const tips = await this.tipRepository.find(options);
-    //delete tips.idUser.password;
     return tips;
   }
 
@@ -106,23 +103,10 @@ export class TipsService {
     return tips;
   }
 
-  /* async update(userId, updateTipDto: UpdateTipDto) {
-     const tips = await this.tipRepository.findOne({ where: { id: updateTipDto.id } });
-     if(!tips) {
-       throw new NotFoundException(`Tips not found`);
-     }
-     const updatedTip = {
-       ...tips,
-       ...updateTipDto,
-     }
-     await this.tipRepository.save(updateTipDto);
-     return updatedTip;
-   }
-   */
-
   async remove(id: string) {
     return this.tipRepository.delete(id);
   }
+
   async approvateTips(id: string): Promise<Tip> {
     const options: FindManyOptions<Tip> = {
       where: { id: id },
@@ -156,6 +140,7 @@ export class TipsService {
       order: {
         createdAt: 'DESC',
       },
+      where: { approvate: TipsApprovate.Approvate },
       take: 6,
     });
   }

@@ -32,7 +32,7 @@ Cela lancera le serveur de base de données PostgreSQL et l'application Nest.js.
 
 Attendez que les services démarrent. Une fois que vous voyez que PostgreSQL est prêt à accepter les connexions, vous pouvez accéder à l'API de l'application à l'adresse suivante :
 
-http://localhost:3000
+http://172.16.70.192:3000
 
 Mode de développement
 Si vous souhaitez exécuter l'application en mode de développement, vous pouvez utiliser la commande suivante après avoir démarré les services avec Docker Compose :

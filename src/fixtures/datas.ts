@@ -57,6 +57,8 @@ export class Mockups {
       password: 'Azeaze.11',
     });
 
+
+    /*
     await this.usersService.create({
       firstName: 'Hugo',
       lastName: 'Dessauw',
@@ -65,7 +67,7 @@ export class Mockups {
       role: UserRole.User,
       password: 'Azeaze.11',
     });
-    /* await this.usersService.create({
+    await this.usersService.create({
       firstName: 'JeanUser',
       lastName: 'DupontUser',
       birthday: '1990-05-15',

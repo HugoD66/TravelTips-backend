@@ -1,13 +1,13 @@
 version: '3'
 services:
   postgres:
-    container_name: postgresTravelTips
+    container_name: postgresv2b
     image: bitnami/postgresql:latest
     restart: always
     environment:
-      POSTGRES_PASSWORD: 'workdb123'
-      POSTGRES_USER: 'adminTravelTips'
-      POSTGRES_DB: 'travelTips'
+      POSTGRES_PASSWORD: 'v2bPassword'
+      POSTGRES_USER: 'adminv2b'
+      POSTGRES_DB: 'v2b'
     ports:
       - '5650:5432'
     volumes:
